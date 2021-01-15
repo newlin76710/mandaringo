@@ -142,7 +142,7 @@
 		<li style="margin:0;">
 			<div class="noword clearfix">
 				<div class="number c"></div>
-				<p>透過兒歌、律動、戲劇、以及繪本故事<br/>等媒材，陪伴孩子們壹起學習與成長。</p>
+				<p>透過兒歌、律動、戲劇、以及繪本故事<br/>等媒材，陪伴孩子們一起學習與成長。</p>
 			</div>
 			<div class="proimg"><img src="images/img16.png" /></div>
 		</li>

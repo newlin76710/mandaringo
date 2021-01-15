@@ -131,9 +131,9 @@ Mandarin Go invites your children to learn while developing fond memories of the
 		<h1>Founder</h1>
 	</div>
 	<div class="fw">
-		<div class="fw-photo"><img src="images/teacher01.jpg" /></div>
+		<div class="fw-photo"><img src="images/teacher001.jpg" /></div>
 		<div class="fw-word">
-			<h2>Yu-Ting Lin 林昱廷</h2>
+			<h2>Yu-Ting Lin</h2>
 			<p class="mt15">The reason that I started Mandarin Go is to create an environment for more children to happily learn Mandarin and create their own precious childhood memories, while giving an opportunity for teachers to fulfil their passions. <br/>
 Children are very curious about the world which they live in and language can help them expand their awareness, and more importantly their future prospects. Through Mandarin Go, I hope to see our students develop their emotional potential, such as sharing and caring for others as well as self-description; physical development, through limbic and intrinsic movements; and their local, cultural and global awareness. <br/>
 Learning is a journey of growth and I hope that children can be happy as they grow and learn with us. My wish is that all the children and teachers growing with us can enjoy a joyful and memorable experience. 
