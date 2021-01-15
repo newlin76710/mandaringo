@@ -207,7 +207,7 @@ Learning is a journey of growth and I hope that children can be happy as they gr
 		<div class="contact">
 			<a href="https://www.facebook.com/MandarinGoUK/" class="facebook" title="facebook"  target="_blank"></a>
 		</div>
-		<div class="copyright">© 2020 Mandarin Go Ltd. All Rights Reserved</div>
+		<div class="copyright">© Mandarin Go Ltd. All Rights Reserved. </div>
 		<a href="mailto:MandarinGOUK@hotmail.com" class="linklogo"></a>
 	</div>
 </div>

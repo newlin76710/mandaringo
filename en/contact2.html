@@ -80,7 +80,7 @@ Address：78 Hampstead High St, Hampstead, London NW3 1RE
 		<div class="contact">
 			<a href="https://www.facebook.com/MandarinGoUK/" class="facebook" title="facebook" target="_blank"></a>
 		</div>
-		<div class="copyright">© 2020 Mandarin Go Ltd. All Rights Reserved</div>
+		<div class="copyright">© Mandarin Go Ltd. All Rights Reserved. </div>
 		<a href="mailto:MandarinGOUK@hotmail.com" class="linklogo"></a>
 	</div>
 </div>
