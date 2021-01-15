@@ -131,7 +131,7 @@ Mandarin Go invites your children to learn while developing fond memories of the
 		<h1>Founder</h1>
 	</div>
 	<div class="fw">
-		<div class="fw-photo"><img src="images/teacher001.jpg" /></div>
+		<div class="fw-photo"><img src="images/teacher01.jpg" /></div>
 		<div class="fw-word">
 			<h2>Yu-Ting Lin</h2>
 			<p class="mt15">The reason that I started Mandarin Go is to create an environment for more children to happily learn Mandarin and create their own precious childhood memories, while giving an opportunity for teachers to fulfil their passions. <br/>

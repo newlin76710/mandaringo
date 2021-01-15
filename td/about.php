@@ -66,7 +66,7 @@ document.getElementById(bg_div).style.display='none';
 		<h6>Founder</h6>
 	</div>
 	<div class="fw">
-		<div class="fw-photo"><img src="images/teacher001.jpg" /></div>
+		<div class="fw-photo"><img src="images/teacher01.jpg" /></div>
 		<div class="fw-word">
 			<h2>Yu-Ting Lin</h2>
 			<p class="mt20">創辦 Mandarin Go 目的是希望能夠培養更多快樂的孩子，渴望孩子們能夠在幼兒學習階段遇到好老師。這不僅是孩子們的福氣，更是老師們的福份。
