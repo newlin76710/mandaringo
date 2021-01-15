@@ -25,12 +25,12 @@
 .tit h6									{font-size:20px;line-height:60px;color:#cccccc;text-align:center;font-weight:normal;}
 #mainboxa ul							{width:1210px;margin:0 auto}
 #mainboxa ul li 						{width:385px;margin-right:25px;background:#fff;border-radius:10px;float:left}
-#mainboxa ul li .noword 				{padding:38px 20px;}
-#mainboxa ul li .noword .number 		{width:70px;height:60px;float:left;}
-#mainboxa ul li .noword .number.a 		{background:url(../images/imsg.png) -12px -125px;}
-#mainboxa ul li .noword .number.b 		{background:url(../images/imsg.png) -85px -125px;}
-#mainboxa ul li .noword .number.c 		{background:url(../images/imsg.png) -160px -125px;}
-#mainboxa ul li .noword p 				{float:left;font-size:16px;line-height:30px;}
+#mainboxa ul li .noword 				{padding:20px 20px;}
+#mainboxa ul li .noword .number 		{width:60px;height:60px;float:left;margin-top:30px;}
+#mainboxa ul li .noword .number.a 		{background:url(../images/imsg.png) -20px -125px;}
+#mainboxa ul li .noword .number.b 		{background:url(../images/imsg.png) -93px -125px;}
+#mainboxa ul li .noword .number.c 		{background:url(../images/imsg.png) -168px -125px;}
+#mainboxa ul li .noword p 				{float:left;font-size:16px;line-height:22px;height:110px;}
 #mainboxa ul li .proimg img 			{border-radius:0 0 10px 10px;}
 
 #mainboxb								{background:url(../images/img02.png);height:682px;min-width:1230px;width:auto;}
@@ -55,7 +55,7 @@
 .study-list li .see:hover				{background:url(../images/img43h.png);}
 
 .genbox									{width:1210px;margin:0 auto;}
-.aboutword								{font-size:18px;line-height:32px;}
+.aboutword								{font-size:16px;line-height:26px;}
 
 #mainboxd								{background:#1fa5d6;padding-bottom:40px;min-width:1230px;width:auto;}
 .tit2									{width:1210px;margin:0 auto;padding:45px 10px 30px;}
@@ -73,7 +73,7 @@
 .fw	.fw-word							{float:left;width:780px;}
 .fw	.fw-word h2							{color:#ffffff;font-size:24px;font-weight:bold;line-height:40px;margin:5px 0;}
 .fw	.fw-word h6							{color:#ffffff;font-size:16px;line-height:28px;font-weight:normal;margin-bottom:10px;}
-.fw	.fw-word p							{color:#ffffff;font-size:16px;line-height:30px;}
+.fw	.fw-word p							{color:#ffffff;font-size:16px;line-height:26px;}
 
 
 .active									{width:1210px;margin:0 auto;}
@@ -155,22 +155,22 @@
 .currbox li 							{float:left;margin-right:30px;}
 .currbox li .curcon						{width:331px;height:480px;display:block;border-radius:10px;position:relative;background:#fff;padding:0 26px;margin-bottom:35px;}
 .currbox li	h2							{font-size:24px;line-height:32px;padding:23px 0 23px;}
-.currbox li	.descrip					{font-size:16px;line-height:28px;margin:20px 0 20px 0;color:#999999;height:115px;}
-.currbox li	.age						{font-size:16px;border-top:1px dotted #eeeeee;width:260px;line-height:60px;}
+.currbox li	.descrip					{font-size:14px;line-height:22px;margin:20px 0 20px 0;color:#999999;height:115px;}
+.currbox li	.age						{font-size:14px;border-top:1px dotted #eeeeee;width:260px;line-height:60px;}
 .currbox li .scircle1, .currbox li .scircle2, .currbox li .scircle3, .currbox li .scircle4, .currbox li .scircle5 {border:6px solid #f2f2f2;position:absolute;right:-13px;bottom:-13px;height:94px;width:94px;border-radius:60px;}
 .currbox li .scircle1					{background:url(../images/img25.png) 18px 0 no-repeat #fff;}
 .currbox li .scircle2					{background:url(../images/img26.png) 18px 0 no-repeat #fff;}
 .currbox li .scircle3					{background:url(../images/img27.png) 18px 0 no-repeat #fff;}
 .currbox li .scircle4					{background:url(../images/img28.png) 18px 0 no-repeat #fff;}
 .currbox li .scircle5					{background:url(../images/img29.png) 18px 0 no-repeat #fff;}
-.currbox .total							{width:331px;height:480px;float:left;margin-right:30px;border-radius:10px;background: url(../images/img22.png) 55px 190px #9dcdef no-repeat;color:#ffffff;font-size:32px;line-height:50px;text-align:center;font-weight:bold;padding:0 26px;position:relative;}
+.currbox .total							{width:331px;height:480px;float:left;margin-right:30px;border-radius:10px;background: url(../images/img22.png) 55px 190px #9dcdef no-repeat;color:#ffffff;font-size:18px;line-height:30px;text-align:left;font-weight:normal;padding:0 26px;position:relative;}
 .currbox .total p						{margin-top:43px;}
 .currbox .total .circle					{background: url(../images/img23.png) 35px 25px no-repeat #9dcdef;border:6px solid #f2f2f2;position:absolute;right:-13px;bottom:-13px;height:94px;width:94px;border-radius:60px;}
 
 .classbox								{width:1230px;margin:0 auto;padding:10px 0;}
 .classbox li 							{float:left;margin-right:30px;}
-.classbox li .classbox					{width:331px;height:498px;display:block;border-radius:10px;position:relative;background:#fff;padding:0 26px;margin-bottom:35px;}
-.classbox li h2							{font-size:24px;line-height:32px;padding:23px 0 5px;}
+.classbox li .classbox					{width:331px;height:570px;display:block;border-radius:10px;position:relative;background:#fff;padding:0 26px;margin-bottom:35px;}
+.classbox li h2							{font-size:18px;line-height:24px;padding:23px 0 15px;height:50px;}
 .classbox li h6							{font-size:16px;line-height:32px;padding:0 0 10px;font-weight:normal;}
 .classbox li .descrip					{font-size:14px;line-height:28px;margin:20px 0 20px 0;color:#999999;height:188px;}
 
@@ -210,4 +210,18 @@
 .newslist li							{border-bottom:1px dotted #eeeeee;line-height:56px;padding:0 15px;font-size:16px;}
 .newslist li a							{display:block;float:left;width:900px;text-align:left;}
 
+@media screen and (max-width:1210px){
+body{min-width:375px;margin:0 auto; background:#f5f5f5;}
+#head									{}
+#head .navbox							{height:108px;background:#fff;position:inherit;width:100%;z-index:99;}
+#head .navbox .nav						{min-width:1230px;width:1230px;margin:0 auto;}
+#head .navbox .nav .logo				{float:left;background:url(../images/imsg.png) 0 0;width:290px;height:108px;display:block;margin-left:10px;}
+#head .navbox .nav .list				{float:right;margin-right:10px;}
+#head .navbox .nav .toolbar				{float:left;margin-top:20px;margin-left:10px;}
+#head .navbox .nav .toolbar	li			{float:left;margin-right:20px;}
+#head .navbox .nav .toolbar	li a		{background:url(../images/imsg.png) 382px -19px;width:117px;height:70px;font-size:16px;text-align:center;color:#333;display:block;line-height:70px;}
+#head .navbox .nav .toolbar	li a:hover	{background:url(../images/imsg.png) 533px -19px;color:#fff;font-weight:bold;}
+#head .navbox .nav .toolbar	li a.now	{background:url(../images/imsg.png) 533px -19px;color:#fff;font-weight:bold;}
+.mainview								{padding-top:0;background:url(../images/mainview.jpg) center bottom no-repeat;height:570px;min-width:1230px;width:auto;}
+}
 

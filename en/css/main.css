@@ -210,4 +210,18 @@
 .newslist li							{border-bottom:1px dotted #eeeeee;line-height:56px;padding:0 15px;font-size:16px;}
 .newslist li a							{display:block;float:left;width:900px;text-align:left;}
 
+@media screen and (max-width:1210px){
+body{min-width:375px;margin:0 auto; background:#f5f5f5;}
+#head									{}
+#head .navbox							{height:108px;background:#fff;position:inherit;width:100%;z-index:99;}
+#head .navbox .nav						{min-width:1230px;width:1230px;margin:0 auto;}
+#head .navbox .nav .logo				{float:left;background:url(../images/imsg.png) 0 0;width:290px;height:108px;display:block;margin-left:10px;}
+#head .navbox .nav .list				{float:right;margin-right:10px;}
+#head .navbox .nav .toolbar				{float:left;margin-top:20px;margin-left:10px;}
+#head .navbox .nav .toolbar	li			{float:left;margin-right:20px;}
+#head .navbox .nav .toolbar	li a		{background:url(../images/imsg.png) 382px -19px;width:117px;height:70px;font-size:16px;text-align:center;color:#333;display:block;line-height:70px;}
+#head .navbox .nav .toolbar	li a:hover	{background:url(../images/imsg.png) 533px -19px;color:#fff;font-weight:bold;}
+#head .navbox .nav .toolbar	li a.now	{background:url(../images/imsg.png) 533px -19px;color:#fff;font-weight:bold;}
+.mainview								{padding-top:0;background:url(../images/mainview.jpg) center bottom no-repeat;height:570px;min-width:1230px;width:auto;}
+}
 

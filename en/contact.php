@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Contact - Mandarin GO - Fun Learn Grow</title>
+<meta name="keywords" content="Mandarin, Chinese, mandaringo, children education, Chinese Language, Chinese culture, London, United Kingdom, UK, Fun, Learn, grown,Education, education centre, language centre, academy, institution " />
+<meta name="description" content="The best Chinese Language and culture centre for children">
+<link rel="shortcut icon" href="images/favicon.ico" type="images/favicon.ico">
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/admin.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" ></script>
+<script type="text/javascript">
+    var imgUrl = 'images/soview.png'; 
+    var descContent = 'Chinese Language and Culture Learning Centre for Children';
+    var shareTitle = 'Mandarin GO - Fun Learn Grow';
+    var appid = '';
+
+    $.ajax({
+        type : 'POST',
+        url :  "http://dev.mymax.cn/running/comm/weixin/open/jsSDKConfig", //这个地址并非通用且长期有效，请去微信官方查看文档，并自行配置
+        dataType : "json",
+        data:{url:window.location.href},
+        success : function(response){
+             var appId = response.s.appId;
+                var timestamp = response.s.timeStamp;
+                var nonceStr = response.s.nonceStr;
+                var signature = response.s.signature;
+
+                wx.config({
+                    debug: false,
+                    appId: appId,
+                    timestamp: timestamp,
+                    nonceStr: nonceStr,
+                    signature: signature,
+                    jsApiList: [
+                        'checkJsApi',
+                        'onMenuShareTimeline',
+                        'onMenuShareAppMessage'
+                    ]
+                });
+                 wx.ready(function() {
+                         
+                        wx.onMenuShareTimeline({
+                            title: shareTitle, // 分享标题
+                            link: lineLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                            imgUrl: imgUrl, // 分享图标
+                            success: function () {
+                                // 用户确认分享后执行的回调函数
+                            },
+                            cancel: function () {
+                                // 用户取消分享后执行的回调函数
+                            }
+                        });
+                        wx.onMenuShareAppMessage({
+                            title: shareTitle, // 分享标题
+                            desc: descContent, // 分享描述
+                            link: lineLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                            imgUrl: imgUrl, // 分享图标
+                            type: '', // 分享类型,music、video或link，不填默认为link
+                            dataUrl:'' , // 如果type是music或video，则要提供数据链接，默认为空
+                            success: function () {
+                                // 用户确认分享后执行的回调函数
+                                
+                            },
+                            cancel: function () {
+                                // 用户取消分享后执行的回调函数
+                            }
+                        });
+                });
+        },
+        error:function(response){
+            window.parent.growl("删除失败["+response.responseText+"]!","error");
+        }
+    });
+</script>
+</head>
+
+<body>
+<img src="images/soview.png" width="0" height="0" />
+<div id="head">
+	<div class="navbox">
+		<div class="nav">
+			<a href="/" class="logo" title="Mandarin GO"></a>
+			<div class="list">
+				<ul class="toolbar">
+					<li><a href="/">Home</a></li>
+					<li><a href="about">About</a></li>
+					<li><a href="curriculum">Curriculum</a></li>
+					<li><a href="source">Resource</a></li>
+					<li><a href="contact" class="now">Contact</a></li>
+				</ul>
+				<div class="lanshift"><a href="/" class="blue b">EN</a> <span class="gray9">/</span> <a href="../cn/" class="gray9">简</a> <span class="gray9">/</span> <a href="../td/" class="gray9">繁</a></div>
+			</div>
+		</div>
+	</div>
+	<div class="mainview4"></div>
+</div>
+
+<div id="mainboxe" class="clearfix" style="min-height:1400px;height:auto;">
+	<div class="container2">
+		<ul class="contact clearfix mb30">
+			<li>
+				<div class="tc"><img src="images/img37.png" /></div>
+				<h2>Centre Location</h2>
+				<p class="fs18">London, United Kingdom<br/>
+- Hampstead&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Hammersmith & Fulham<br/>
+- Wandsworth&nbsp;&nbsp;&nbsp;- Kensington & Chelsea<br/>
+- Wimbledon&nbsp;&nbsp;&nbsp;&nbsp;- Twickenham</p>
+			</li>
+			<li>
+				<div class="tc"><img src="images/img38.png" /></div>
+				<h2>Contact Methods</h2>
+				<p><a href=mailto:MandarinGOUK@hotmail.com  class="gray6">Email：MandarinGOUK@hotmail.com</a><br/><a href="https://www.facebook.com/MandarinGoUK/" target="_blank" class="gray6">Facebook: Mandarin GO</a></p>
+			</li>
+			<li style="margin:0;">
+				<div class="tc"><img src="images/img39.png" /></div>
+				<h2>Collaboration</h2>
+				<p style="line-height:22px;">Mandarin Go provides professional teaching service and collaborates with local communities to create a meaningful andimmersive environment for children to learn Mandarin and experience Chinese culture. </p>
+				<div class="wayto">Email：MandarinGOUK@hotmail.com</div>
+			</li>
+		</ul>
+		<div class="message mb20 clearfix">
+<!--			<h2 class="tc mb30 mt30">发送邮件</h2>
+-->			<div class="" style="margin:80px 100px 0 100px;">
+			  <div class="">
+				  <p class="mb30 mt20 fs18 tc" style="line-height:52px;">
+Welcome to our Mandarin Go query form for questions related to classes, collaborations or joining our team!<br/>
+<span style="font-weight:bold;font-size:24px;color:#0fb6ef;">Please Email:</span><a href=mailto:MandarinGOUK@hotmail.com style="font-weight:bold;font-size:24px;">MandarinGOUK@hotmail.com</a></p>
+                  <p class="tc mb30"><img src="images/img45.png" /></p>
+					<p class="fs18 gray6 tc" style="line-height:40px;">Remember to add your name, contact method (email or phone number) to the email.<br/>Thank you!</p></div>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<div id="foot">
+	<div class="footbox clearfix" >
+		<div class="contact">
+			<a href="https://www.facebook.com/MandarinGoUK/" class="facebook" title="facebook" target="_blank"></a>
+		</div>
+		<div class="copyright">© 2020 Mandarin Go Ltd. All Rights Reserved</div>
+		<a href="mailto:MandarinGOUK@hotmail.com" class="linklogo"></a>
+	</div>
+</div>
+</body>
+</html>

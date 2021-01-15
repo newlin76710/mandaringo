@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Mandarin GO 快乐学中文</title>
+<meta name="keywords" content="汉语、华语、中文、幼儿、儿童、教育、语言、中华、文化" />
+<meta name="description" content="快乐学中文">
+<link rel="shortcut icon" href="images/favicon.ico" type="images/favicon.ico">
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/admin.js"></script>
+
+<script type="text/javascript">
+		function AutoScroll(obj) {
+			var lh = $("#scroll-news").height();
+			$(obj).find("ul:first").animate({
+				marginTop: "-"+lh+"px"
+			}, 500, function() {
+				$(this).css({
+					marginTop: "0px"
+				}).find("li:first").appendTo(this);
+			});
+		}
+		$(document).ready(function() {
+			setInterval('AutoScroll("#scroll-news")', 5000);
+		});
+</script>
+</head>
+
+<body>
+<img src="images/soview.png" width="0" height="0" />
+<div id="head">
+	<div class="navbox">
+		<div class="nav">
+			<a href="/" class="logo" title="Mandarin GO 快乐学中文"></a>
+			<div class="list">
+				<ul class="toolbar">
+					<li><a href="./" class="now">首页</a></li>
+					<li><a href="./about">关于我们</a></li>
+					<li><a href="./curriculum">课程介绍</a></li>
+					<li><a href="./source">资源共享</a></li>
+					<li><a href="./contact">联系我们</a></li>
+				</ul>
+				<div class="lanshift"><a href="../en/" class="gray9">EN</a> <span class="gray9">/</span> <a href="../cn/" class="blue b">简</a> <span class="gray9">/</span> <a href="../td/" class="gray9">繁</a></div>
+			</div>
+		</div>
+	</div>
+	<div class="mainview"></div>
+</div>
+<!--<div class="index-news">
+	<div class="index-news-con">
+		<div class="index-news-tit red">最新资讯：</div>
+		<div class="qs-express-news" id="scroll-news">
+			<div class="news-list-wrapper">
+				<ul class="news-list" style="margin-top:0px;">
+					<li class="news-item">
+						<a class="" href="news-detail.html" target="_blank">
+							中国传统民俗童玩课程开课啦--不仅能了解中国文化和经验传承，更能快乐学中文呦，赶快报名吧~~
+						</a>
+						<span class="fl gray9">2018-09-08</span>
+					</li>
+					<li class="news-item">
+						<a class="" href="news-detail.html" target="_blank">
+							中国传统民俗童玩课程开课啦--不仅能了解中国文化和经验传承，更能快乐学中文呦，赶快报名吧~~
+						</a>
+						<span class="fl gray9">2018-09-08</span>
+					</li>
+					<li class="news-item">
+						<a class="" href="news-detail.html" target="_blank">
+							中国传统民俗童玩课程开课啦--不仅能了解中国文化和经验传承，更能快乐学中文呦，赶快报名吧~~
+						</a>
+						<span class="fl gray9">2018-09-08</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>	
+</div>-->
+<!--<div class="mb30 clearfix">
+	<div class="tit" style="padding-bottom:15px;">
+		<h1>最新资讯</h1>
+		<h6>Information</h6>
+	</div>
+	<ul class="newslist" style="width:1210px;">
+		<li class="clearfix">
+			<a class="" href="news-detail.html" target="_blank">
+				中国传统民俗童玩课程开课啦--不仅能了解中国文化和经验传承，更能快乐学中文呦~~
+			</a>
+			<span class="fr gray9">2018-09-08</span>
+		</li>
+		<li class="clearfix">
+			<a class="" href="news-detail.html" target="_blank">
+				中国传统民俗童玩课程开课啦--不仅能了解中国文化和经验传承，更能快乐学中文呦~~
+			</a>
+			<span class="fr gray9">2018-09-08</span>
+		</li>
+		<li class="clearfix">
+			<a class="" href="news-detail.html" target="_blank">
+				中国传统民俗童玩课程开课啦--不仅能了解中国文化和经验传承，更能快乐学中文呦~~
+			</a>
+			<span class="fr gray9">2018-09-08</span>
+		</li>
+		<li class="clearfix">
+			<a class="" href="news-detail.html" target="_blank">
+				中国传统民俗童玩课程开课啦--不仅能了解中国文化和经验传承，更能快乐学中文呦~~
+			</a>
+			<span class="fr gray9">2018-09-08</span>
+		</li>
+		<li class="clearfix">
+			<a class="" href="news-detail.html" target="_blank">
+				中国传统民俗童玩课程开课啦--不仅能了解中国文化和经验传承，更能快乐学中文呦~~
+			</a>
+			<span class="fr gray9">2018-09-08</span>
+		</li>
+	</ul>
+	<div class="mt30 mb20 tc" style="width:100%;">
+		<a  href="news.html" class="btn3" style="margin:0 auto;" >查看全部资讯</a>
+	</div>
+</div>-->
+<div id="mainboxa" class="clearfix">
+	<div class="tit">
+		<h1>教育理念</h1>
+		<h6>Teaching Philosophy</h6>
+	</div>
+	<ul>
+		<li>
+			<div class="noword clearfix">
+				<div class="number a"></div>
+				<p>重视儿童全人教育及各大领域的发展，<br/>让儿童沈浸于快乐的学习环境中。</p>
+			</div>
+			<div class="proimg"><img src="images/img14.png" /></div>
+		</li>
+		<li>
+			<div class="noword clearfix">
+				<div class="number b"></div>
+				<p>课程内容从幼儿的生活经验出发，涵盖<br/>符合幼儿身心发展的十大精选主题。</p>
+			</div>
+			<div class="proimg"><img src="images/img15.png" /></div>
+		</li>
+		<li style="margin:0;">
+			<div class="noword clearfix">
+				<div class="number c"></div>
+				<p>透过儿歌、律动、戏剧、以及绘本故事<br/>等媒材，陪伴孩子们一起学习与成长。</p>
+			</div>
+			<div class="proimg"><img src="images/img16.png" /></div>
+		</li>
+	</ul>
+</div>
+<div id="mainboxb" class="clearfix">
+	<div class="frameimg"><img src="images/img01.png" /></div>
+</div>
+<div id="mainboxc" class="clearfix">
+	<div class="tit">
+		<h1>精选主题</h1>
+		<h6>Featured Themes</h6>
+		<p class="fs18 lh30">依据学龄前幼儿的生活经验，由基本认知及认识自我开始，到与校园生活、认识社区、职业等社会建立联结，透过不同的主题来设计基础教材。<br/>
+教材以主题式课程的方式为构架，其设计以幼儿的日常生活经验出发，设计贴近幼儿能力指标的课程活动，使幼儿在学习语言的同时，兼顾身心发展。</p>
+	</div>
+	<ul>
+		<li>
+			<div class="mb"><img src="images/img04.png" /></div>
+			<p>基本认知</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img05.png" /></div>
+			<p>认识自我</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img06.png" /></div>
+			<p>我的家庭</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img07.png" /></div>
+			<p>校园生活</p>
+		</li>
+		<li style="margin:0;">
+			<div class="mb"><img src="images/img08.png" /></div>
+			<p>认识社区</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img09.png" /></div>
+			<p>社会职业</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img10.png" /></div>
+			<p>认识动物</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img11.png" /></div>
+			<p>爱护环境</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img12.png" /></div>
+			<p>健康与食物</p>
+		</li>
+		<li style="margin:0;">
+			<div class="mb"><img src="images/img13.png" /></div>
+			<p>节庆与特殊节日</p>
+		</li>
+	</ul>
+</div>
+<div id="foot">
+	<div class="footbox clearfix" >
+		<div class="contact">
+			<a href="https://www.facebook.com/MandarinGoUK/" class="facebook" title="facebook"  target="_blank"></a>
+		</div>
+		<div class="copyright">© 2020 Mandarin Go Ltd. All Rights Reserved</div>
+		<a href="mailto:MandarinGOUK@hotmail.com" class="linklogo"></a>
+	</div>
+</div>
+<!--<div id="black_overlay" class="black_overlay" style="display:block;position:fixed;"></div>
+<div id="white_content" class="white_content" style="display:block;">
+	<div class="white_box">
+		<span class="closelay"></span>
+		<div class="tc">	
+			<img src="act/images/act01.jpg" border="0" usemap="#Map" />
+			<map name="Map" id="Map">
+			  <area shape="rect" coords="272,404,588,452" href="act/curriculum01.html"  style="outline:none;"/>
+			</map>
+	  </div>
+	</div>
+</div>
+<script type="text/javascript">
+
+$(".closelay").click( function () { 
+	$("#black_overlay").hide();
+	$("#white_content").hide();
+
+ });
+$(".black_overlay").click( function () { 
+	$("#black_overlay").hide();
+	$("#white_content").hide();
+
+ });
+
+</script> -->
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>課程介紹 - Mandarin GO 快樂學中文</title>
+<meta name="keywords" content="漢語、華語、中文、幼兒、兒童、教育、語言、中華、文化" />
+<meta name="description" content="快樂學中文">
+<link rel="shortcut icon" href="images/favicon.ico" type="images/favicon.ico">
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/admin.js"></script>
+
+</head>
+
+<body>
+<img src="images/soview.png" width="0" height="0" />
+<div id="head">
+	<div class="navbox">
+		<div class="nav">
+			<a href="/" class="logo" title="Mandarin GO 快樂學中文"></a>
+			<div class="list">
+				<ul class="toolbar">
+					<li><a href="../td/">首頁</a></li>
+					<li><a href="about">關於我們</a></li>
+					<li><a href="curriculum" class="now">課程介紹</a></li>
+					<li><a href="source">資源共享</a></li>
+					<li><a href="contact">聯繫我們</a></li>
+				</ul>
+				<div class="lanshift"><a href="../en/" class="gray9">EN</a> <span class="gray9">/</span> <a href="../cn/" class="gray9">简</a> <span class="gray9">/</span> <a href="../td/" class="blue b">繁</a></div>
+			</div>
+		</div>
+	</div>
+	<div class="mainview3"></div>
+</div>
+
+<div>
+<div id="mainboxe" class="clearfix">
+	<ul class="currbox">
+		<li class="total">
+			<p>精選優質課程體系<br/>
+	打造專業學習環境</p>
+			<div class="circle"></div>
+		</li>
+		<li>
+			<a href="http://bit.ly/MGInterestSurveyForm">
+			<div class="curcon">
+				<h2>種子班</h2>
+				<div><img src="images/img26.jpg" /></div>
+				<p class="descrip">適合對華語文有興趣的孩子，在家長的陪同下，於沈浸式的環境中學習，培養孩子對華語文的興趣。</p>
+				<p class="age">建議年齡：<span class="b">1歲以上</span></p>
+				<div class="scircle1"></div>
+			</div>
+			</a>
+		</li>
+		<li style="margin:0;">
+			<a href="http://bit.ly/MGInterestSurveyForm">
+			<div class="curcon">
+				<h2>培育班</h2>
+				<div><img src="images/img24.jpg" /></div>
+				<p class="descrip">
+透過兒歌、童謠以及故事，培養孩子對於中文的熟悉度，並且從問候、打招呼等基本的詞語，建立孩子的中文能力。</p>
+				<p class="age">建議年齡：<span class="b">3歲以上</span></p>
+				<div class="scircle2"></div>
+			</div>
+			</a>
+		</li>
+		<li>
+			<a href="http://bit.ly/MGInterestSurveyForm">
+			<div class="curcon">
+				<h2>萌芽班</h2>
+				<div><img src="images/img25.jpg" /></div>
+				<p class="descrip">透過活潑生動的教學方式，循序漸進地鼓勵孩子使用中文回應，理解簡單的中文對話，辨別日常生活中常用的詞匯。</p>
+				<p class="age">建議年齡：<span class="b">5歲以上</span></p>
+				<div class="scircle3"></div>
+			</div>
+			</a>
+		</li>
+		<li>
+			<a href="http://bit.ly/MGInterestSurveyForm">
+			<div class="curcon">
+				<h2>成長班</h2>
+				<div><img src="images/img27.jpg" /></div>
+				<p class="descrip">適合接觸過華語文學習、並且想持續增進中文能力的孩子，例如使用中文回答問題，敘說自己感興趣的話題，閱讀與書寫簡單的字句。</p>
+				<p class="age">建議年齡：<span class="b">8歲以上</span></p>
+				<div class="scircle4"></div>
+			</div>
+			</a>
+		</li>
+		<li style="margin:0;">
+			<a href="http://bit.ly/MGInterestSurveyForm">
+			<div class="curcon">
+				<h2>茁壯班</h2>
+				<div><img src="images/img28.jpg" /></div>
+				<p class="descrip">適合擁有進階華語文程度或華語文母語者的孩子，茁壯班將訓練孩子以流利且自信的口語進行對話，理解具體或抽象的話題，閱讀短篇文本，撰寫簡短的書信、日記等。</p>
+				<p class="age">建議年齡：<span class="b">8歲以上</span></p>
+				<div class="scircle5"></div>
+			</div>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div id="mainboxc" class="clearfix" style="background:#fff;">
+	<div class="tit" style="padding-bottom:20px;">
+		<h1>精選主題</h1>
+		<h6>Themes- Fantastic Fun and Learning</h6>
+		<p class="fs18" style="line-height:32px;">以豐富多元的精選主題為課程構架，從兒童的生活經驗為出發點，設計活潑有趣的課程內容及貼近兒童學習能力指標的活動。透過兒歌童謠、說故事及律動等富有教育意義的活動，帶領著孩子們一同成長，培養孩子們對於中文學習的興趣。</p>
+	</div>
+	<ul>
+		<li>
+			<div class="mb"><img src="images/img04.png" /></div>
+			<p>基本認知</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img05.png" /></div>
+			<p>認識自我</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img06.png" /></div>
+			<p>我的家庭</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img07.png" /></div>
+			<p>校園生活</p>
+		</li>
+		<li style="margin:0;">
+			<div class="mb"><img src="images/img08.png" /></div>
+			<p>認識社區</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img09.png" /></div>
+			<p>社會職業</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img10.png" /></div>
+			<p>認識動物</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img11.png" /></div>
+			<p>愛護環境</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img12.png" /></div>
+			<p>健康與食物</p>
+		</li>
+		<li style="margin:0;">
+			<div class="mb"><img src="images/img13.png" /></div>
+			<p>節慶與特殊節日</p>
+		</li>
+	</ul>
+</div>
+
+<div id="mainboxd" class="clearfix" style="background:#f2f2f2;">
+	<div class="tit" style="padding-bottom:20px;">
+		<h1>中華文化課程與體驗活動</h1>
+		<h6>Chinese Cultural Activities and Events</h6>
+	</div>
+	<ul class="classbox">
+		<li>
+			<div class="classbox">
+				<h2>開放日</h2>
+				<h6>Mandarin Go Open Day</h6>
+				<div><img src="images/classimg04.jpg" /></div>
+				<p class="descrip">
+日期：3 月 23 日，星期六<br/>
+時間：10:30-11:30<br/>
+地點：Hampstead Community Centre<br/>
+地址：78 Hampstead High St, Hampstead, London NW3 1RE
+</p>
+			</div>
+		</li>
+		<li>
+			<div class="classbox">
+				<h2>中國傳統新年活動</h2>
+				<h6>Traditional Chinese New Year</h6>
+				<div><img src="images/classimg02.jpg" /></div>
+				<p class="descrip">日期：2 月 3 日，星期六<br/>
+時間：11:00-16:00<br/>
+地點：Burgh House & Hampstead Museum<br/>
+地址：New End Square, Hampstead, London NW3 1LT
+</p>
+			</div>
+		</li>
+		<li style="margin:0;">
+			<div class="classbox">
+				<h2>熊熊著色比賽</h2>
+				<h6>The Best Bear Colouring Competition</h6>
+				<div><img src="images/classimg06.jpg" /></div>
+				<p class="descrip" style="font-size:14px;line-height:22px;">
+活動辦法：下載表單，完成作品，填妥報名資訊，將作品拍照或掃描，傳至 <a href="https://www.facebook.com/MandarinGoUK/" target="_blank">Mandarin Go 粉絲頁</a>或 Email（MandarinGOUK@hotmail.com）</p>
+			</div>
+		</li>
+		<li>
+			<a href="http://bit.ly/MGWorkshopForm">
+			<div class="classbox">
+				<h2>兒童中文課程體驗工作坊</h2>
+				<h6>Chinese Culture Workshop for Children</h6>
+				<div><img src="images/classimg05.jpg" /></div>
+				<p class="descrip">日期：4 月 26 日，5 月 24 日，6 月 28 日，星期五<br/>
+時間：16:00 - 17:00<br/>
+地點：Burgh House & Hampstead Museum<br/>
+地址：New End Square, Hampstead, London NW3 1LT<br/>
+報名方法：名額有限,請盡早詢問報名。</p>
+			</div>
+			</a>
+		</li>
+		<li>
+			<div class="classbox">
+				<h2>民俗童玩體驗活動</h2>
+				<h6>Traditional Chinese Folk Activities and Toys</h6>
+				<div><img src="images/classimg03.jpg" /></div>
+				<p class="descrip">Mandarin Go 提供各種傳統中華民俗童玩以及遊戲的體驗活動，邀請家長及孩子們一同來參與體驗，詳情請詢問，謝謝。</p>
+			</div>
+		</li>
+		<li style="margin:0;">
+			<a href="http://bit.ly/MGSummerHolidayCamp">
+			<div class="classbox">
+				<h2>快樂學中文假期營隊</h2>
+				<h6>Fun Learn Chinese Holiday Camp</h6>
+				<div><img src="images/classimg01.jpg" /></div>
+				<p class="descrip"><!--場次一：7 月 22 日至 7 月 26 日<br/>
+場次二：7 月 29 日至 8 月 2 日<br/>-->
+時間：9:30-12:30 或 9:30 - 15:30<br/>
+備註：Mandarin Go 提供延後接送孩子的付費服務，詳情請詢問，謝謝。</p>
+			</div>
+			</a>
+		</li>
+	</ul>
+</div>
+</div>
+
+<div id="foot">
+	<div class="footbox clearfix" >
+		<div class="contact">
+			<a href="https://www.facebook.com/MandarinGoUK/" class="facebook" title="facebook" target="_blank"></a>
+		</div>
+		<div class="copyright">© 2020 Mandarin Go Ltd. All Rights Reserved</div>
+		<a href="mailto:MandarinGOUK@hotmail.com" class="linklogo"></a>
+	</div>
+</div>
+<!--<div id="black_overlay" class="black_overlay" style="display:block;position:fixed;"></div>
+<div id="white_content" class="white_content" style="display:block;">
+	<div class="white_box">
+		<span class="closelay"></span>
+		<div class="tc">	
+			<img src="act/images/act01.jpg" border="0" usemap="#Map" />
+			<map name="Map" id="Map">
+			  <area shape="rect" coords="272,404,588,452" href="act/curriculum01.html"  style="outline:none;"/>
+			</map>
+	  </div>
+	</div>
+</div>
+<script type="text/javascript">
+
+$(".closelay").click( function () { 
+	$("#black_overlay").hide();
+	$("#white_content").hide();
+
+ });
+$(".black_overlay").click( function () { 
+	$("#black_overlay").hide();
+	$("#white_content").hide();
+
+ });
+</script> -->
+</body>
+</html>

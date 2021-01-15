@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Contact - Mandarin GO</title>
+<meta name="keywords" content="Mandarin GO" />
+<meta name="description" content="Mandarin GO">
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/admin.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+<img src="images/shareimg.jpg" width="0" height="0" />
+<div id="head">
+	<div class="navbox">
+		<div class="nav">
+			<a href="/" class="logo" title="Mandarin GO"></a>
+			<div class="list">
+				<ul class="toolbar">
+					<li><a href="/">Home</a></li>
+					<li><a href="about">About</a></li>
+					<li><a href="curriculum">Curriculum</a></li>
+					<li><a href="source">Resource</a></li>
+					<li><a href="contact" class="now">Contact</a></li>
+				</ul>
+				<div class="lanshift"><a href="/" class="blue b">EN</a> <span class="gray9">/</span> <a href="../cn/" class="gray9">简</a> <span class="gray9">/</span> <a href="../td/" class="gray9">繁</a></div>
+			</div>
+		</div>
+	</div>
+	<div class="mainview4"></div>
+</div>
+
+<div id="mainboxe" class="clearfix" style="min-height:1500px;height:auto;">
+	<div class="container2">
+		<ul class="contact clearfix mb30">
+			<li>
+				<div class="tc"><img src="images/img37.png" /></div>
+				<h2>Centre Location</h2>
+				<p>Location：Hampstead Community Centre<br/>
+Address：78 Hampstead High St, Hampstead, London NW3 1RE
+</p>
+			</li>
+			<li>
+				<div class="tc"><img src="images/img38.png" /></div>
+				<h2>Contact Methods</h2>
+				<p>Email：MandarinGOUK@hotmail.com</p>
+				<div class="wayto tc">
+				<a href="https://www.facebook.com/MandarinGoUK/" target="_blank">Facebook: Mandarin GO</a>				
+				</div>
+			</li>
+			<li style="margin:0;">
+				<div class="tc"><img src="images/img39.png" /></div>
+				<h2>Collaboration</h2>
+				<p style="line-height:22px;">Mandarin Go provides professional teaching service and collaborates with local communities to create a meaningful andimmersive environment for children to learn Mandarin and experience Chinese culture. </p>
+				<div class="wayto">Email：MandarinGOUK@hotmail.com</div>
+			</li>
+		</ul>
+		<div class="message mb20 clearfix">
+			<h2 class="tc mb30 mt30">Message Us</h2>
+			<ul class="leave">
+				<form>
+				<li class="mb25 clearfix"><input name="" type="text"  class="input1" placeholder="Full Name"/></li>
+				<li class="mb25 clearfix"><input name="" type="text"  class="input1" placeholder="Email"/></li>
+				<li class="mb25 clearfix"><input name="" type="text"  class="input1" placeholder="Contact Number "/></li>
+				<li class="mb25 clearfix"><textarea name="" cols="" rows="3" class="input2" placeholder="Leave a message…"></textarea></li>
+				<li class="clearfix"><input name="" type="text"  class="input1 mr" placeholder="Enter the verification code"/><span class="fl"><img src="images/img32.png" /></span></li>
+				</form>
+			</ul>
+			<div class="mt20">
+				<input type="button" class="btn3 tc" style="margin:0 auto;" value="Submit "/>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="foot">
+	<div class="footbox clearfix" >
+		<div class="contact">
+			<a href="https://www.facebook.com/MandarinGoUK/" class="facebook" title="facebook" target="_blank"></a>
+		</div>
+		<div class="copyright">© 2020 Mandarin Go Ltd. All Rights Reserved</div>
+		<a href="mailto:MandarinGOUK@hotmail.com" class="linklogo"></a>
+	</div>
+</div>
+</body>
+</html>

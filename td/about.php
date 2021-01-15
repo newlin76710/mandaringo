@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>關於我們 - Mandarin GO 快樂學中文</title>
+<meta name="keywords" content="漢語、華語、中文、幼兒、兒童、教育、語言、中華、文化" />
+<meta name="description" content="快樂學中文">
+<link rel="shortcut icon" href="images/favicon.ico" type="images/favicon.ico">
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/admin.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+//彈出隱藏層
+function ShowDiv(show_div,bg_div){
+document.getElementById(show_div).style.display='block';
+document.getElementById(bg_div).style.display='block' ;
+var bgdiv = document.getElementById(bg_div);
+bgdiv.style.width = document.body.scrollWidth;
+// bgdiv.style.height = $(document).height();
+$("#"+bg_div).height($(document).height());
+};
+//關閉彈出層
+function CloseDiv(show_div,bg_div)
+{
+document.getElementById(show_div).style.display='none';
+document.getElementById(bg_div).style.display='none';
+};
+</script> 
+</head>
+
+<body>
+<img src="images/soview.png" width="0" height="0" />
+<div id="head">
+	<div class="navbox">
+		<div class="nav">
+			<a href="/" class="logo" title="Mandarin GO 快樂學中文"></a>
+			<div class="list">
+				<ul class="toolbar">
+					<li><a href="../td/">首頁</a></li>
+					<li><a href="about" class="now">關於我們</a></li>
+					<li><a href="curriculum">課程介紹</a></li>
+					<li><a href="source">資源共享</a></li>
+					<li><a href="contact">聯繫我們</a></li>
+				</ul>
+				<div class="lanshift"><a href="../en/" class="gray9">EN</a> <span class="gray9">/</span> <a href="../cn/" class="gray9">简</a> <span class="gray9">/</span> <a href="../td/" class="blue b">繁</a></div>
+			</div>
+			</div>
+		</div>
+	</div>
+	<div class="mainview2"></div>
+</div>
+<div id="mainboxc" class="clearfix">
+	<div class="tit">
+		<h1>關於 Mandarin Go</h1>
+		<h6>About Mandarin Go</h6>
+	</div>
+	<div class="genbox aboutword">
+	<p class="mb">Mandarin Go 的成立宗旨為「快樂、學習、成長」，我們提倡英國在地化的中文教育，透過以幼兒生活經驗為出發點設計的主題課程，使孩子們能夠自然而然地從經驗中學習，創造快樂學習與成長的回憶。<br/>
+我們立志成為孩子們學習中文的啟蒙者，讓孩子們喜愛中文，提升孩子對於學習中文的興趣。並帶領孩子認識自我、重視家人之間的情感、關懷他人與認識社區、探索環境、尊重並包容來自世界不同地區的多元文化。</p>
+	</div>
+</div>
+<div id="mainboxd" class="clearfix">
+	<div class="tit2">
+		<h1>創辦者</h1>
+		<h6>Founder</h6>
+	</div>
+	<div class="fw">
+		<div class="fw-photo"><img src="images/teacher01.jpg" /></div>
+		<div class="fw-word">
+			<h2>Yu-Ting Lin 林昱廷</h2>
+			<p class="mt20">創辦 Mandarin Go 目的是希望能夠培養更多快樂的孩子，渴望孩子們能夠在幼兒學習階段遇到好老師。這不僅是孩子們的福氣，更是老師們的福份。我希望每個孩子都能夠開心地成長，擁有愉快且難忘的童年。學習語言可以幫助孩子們擁有更高、更廣的視野，然而孩子們身、心靈全方位的發展同樣重要，因此，除了語言之外，也希望重視孩子們的各種能力，例如：與他人分享，關懷他人，並懂得表達自身在社會與情緒領域的能力；身體動作發展與培養，例如大肌肉肢體動作和小肌肉精細動作；孩子們對於這個世界的好奇心、充滿創意與想像空間的認知、與美感領域的能力。<br/>
+學習，是一種長大的過程，而我們希望，孩子們能夠快樂地長大、快樂地學習。期許每一位跟著我們的老師，一起長大的孩子，都是快樂且幸福的孩子。</p>
+		</div>
+	</div>
+</div>
+<div id="mainboxd" class="clearfix" style="background:#778a99;">
+	<div class="tit2">
+		<h1>團隊成員</h1>
+		<h6 style="color:#a9bbca;">Team Members</h6>
+	</div>
+	<div style="font-size:18px;color:#ffffff;line-height:32px;width:1210px;margin:0 auto 50px;">
+	Mandarin Go 團隊擁有在世界各國的教學經驗，教導不同文化背景的學生，並依據學生需求及發展，設計專業、多元、適性、開放、靈活的教學內容與課程構架。重視文化的多元與差異性，也致力於推廣文化和諧、尊重包容、且快樂成長的學習環境，我們誠摯地歡迎各地人才及不同文化背景的師資加入 Mandarin Go 團隊。
+	</div>
+	<ul class="genbox teacher">
+		<li>
+			<a href="javascript:void(0)" onClick="ShowDiv('MyDiv','fade')">
+				<img src="images/teacher04.jpg" />
+				<h6>舒兆民</h6>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0)" onClick="ShowDiv('MyDiv2','fade2')">
+				<img src="images/teacher03.jpg" />
+				<h6>楊豫揚</h6>
+			</a>
+		</li>
+		<li style="margin:0;">
+			<a href="javascript:void(0)" onClick="ShowDiv('MyDiv3','fade3')">
+				<img src="images/teacher02.jpg" />
+				<h6>陳懷萱</h6>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="mb30 clearfix">
+	<div class="tit">
+		<h1>活動照片</h1>
+		<h6>Activities Photos</h6>
+	</div>
+	<ul class="active">
+		<li>
+			<div class="mb"><img src="images/actimg32.jpg" /></div>
+			<p>認識顏色</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/actimg33.jpg" /></div>
+			<p>好吃的水果</p>
+		</li>
+		<li style="margin:0;">
+			<div class="mb"><img src="images/actimg34.jpg" /></div>
+			<p>DIY小手花圈</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/actimg35.jpg" /></div>
+			<p>探索世界</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/actimg36.jpg" /></div>
+			<p>文化體驗活動</p>
+		</li>
+		<li style="margin:0;">
+			<div class="mb"><img src="images/actimg38.jpg" /></div>
+			<p>書法體驗</p>
+		</li>		
+	</ul>
+</div>
+<div id="foot">
+	<div class="footbox clearfix" >
+		<div class="contact">
+			<a href="https://www.facebook.com/MandarinGoUK/" class="facebook" title="facebook"  target="_blank"></a>
+		</div>
+		<div class="copyright">© 2020 Mandarin Go Ltd. All Rights Reserved</div>
+		<a href="mailto:MandarinGOUK@hotmail.com" class="linklogo"></a>
+	</div>
+</div>
+<!--彈出層時背景層DIV-->
+<div id="fade" class="black_overlay" onClick="CloseDiv('MyDiv','fade')"></div>
+<div id="MyDiv" class="white_content">
+	<div class="white_box">
+		<span class="closelay" onClick="CloseDiv('MyDiv','fade')"></span>
+		<div class="teacherphoto"><img src="images/teacher04.jpg" /></div>
+		<div class="teacherdetail">
+			<h1 class="mb">舒兆民</h1>
+			<p class="mb15">國立臺灣師範大學/華語文教學研究所博士<br/>
+1. 國立臺東大學華語文學系/助理教授<br/>
+2. 國立聯合大學華語文學系/講師、助理教授<br/>
+3. 國立臺灣師範大學國語教學中心/研發師暨華語文教師<br/>
+4. 臺灣僑委會海外華文巡迴研習講座<br/>
+5. 臺灣僑委會網路種子師資培訓課程規劃暨講座<br/>
+6. 臺灣教育部數位華文教學能力培訓課程講座教師<br/>
+7. 台灣華語文教學學會常務理事、祕書長、副祕書長<br/>
+8. 國立臺東大學、國立聯合大學教學傑出優良教師獎<br/>
+9. 執行多項科技部、教育部、僑委會、數位公司之研發等計畫<br/>
+10. 專書、華文教材出版
+</p>
+		</div>
+	</div>
+</div>
+
+<div id="fade2" class="black_overlay" onClick="CloseDiv('MyDiv2','fade2')"></div>
+<div id="MyDiv2" class="white_content">
+	<div class="white_box">
+		<span class="closelay" onClick="CloseDiv('MyDiv2','fade2')"></span>
+		<div class="teacherphoto"><img src="images/teacher03.jpg" /></div>
+		<div class="teacherdetail">
+			<h1 class="mb">楊豫揚</h1>
+			<p class="mb15">日本東海大學/廣報學研究所傳播碩士<br/>
+1.敬業文教服務有限公司/副總經理<br/>
+2.國立臺北教育大學幼教系/教育系兼任講師<br/>
+3.光啟社-歷經企劃部經理、多媒體製作中心主任、業務部副理<br/>
+4.從事節目編劇、企劃、電視製作人、多媒體製作人<br/>
+5.台灣飛利浦公司/多媒體部經理<br/>
+6.資策會科學展示中心/資教組組長、業規組組長<br/>
+7.中華電視公司/教學事業處處長<br/>
+8.華視文化公司/董事<br/>
+9.華視數位科公司/董事<br/>
+10.中華民國空中教育學會/秘書長<br/>
+11.師大華語研究所/精彩漢語專案研究員<br/>
+12.北京蘇活多媒體公司/副總經理<br/>
+13.階梯中國語/多媒體課程製作人<br/>
+14.LIVE ABC互動華語多媒體互動節目課程製作人
+</p>
+		</div>
+	</div>
+</div>
+
+<div id="fade3" class="black_overlay" onClick="CloseDiv('MyDiv3','fade3')"></div>
+<div id="MyDiv3" class="white_content">
+	<div class="white_box">
+		<span class="closelay" onClick="CloseDiv('MyDiv3','fade3')"></span>
+		<div class="teacherphoto"><img src="images/teacher02.jpg" /></div>
+		<div class="teacherdetail">
+			<h1 class="mb">陳懷萱</h1>
+			<p class="mb15">國立臺灣師範大學/華語文教學研究所<br/>
+國立台灣大學國際華語研習所/專任華語教師<br/>
+國立台灣師範大學國語中心/ 兼任華語教師<br/>
+國立中央大學語言中心/ 專案講師<br/>
+國立臺灣師範大學華語文教學系/約聘語言老師
+</p>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>联系我们 - Mandarin GO 快乐学中文</title>
+<meta name="keywords" content="汉语、华语、中文、幼儿、儿童、教育、语言、中华、文化" />
+<meta name="description" content="快乐学中文">
+<link rel="shortcut icon" href="images/favicon.ico" type="images/favicon.ico">
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/admin.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+<img src="images/soview.png" width="0" height="0" />
+<div id="head">
+	<div class="navbox">
+		<div class="nav">
+			<a href="/" class="logo" title="Mandarin GO 快乐学中文"></a>
+			<div class="list">
+				<ul class="toolbar">
+					<li><a href="./">首页</a></li>
+					<li><a href="./about">关于我们</a></li>
+					<li><a href="./curriculum">课程介绍</a></li>
+					<li><a href="./source">资源共享</a></li>
+					<li><a href="./contact" class="now">联系我们</a></li>
+				</ul>
+				<div class="lanshift"><a href="../en/" class="gray9">EN</a> <span class="gray9">/</span> <a href="../cn/" class="blue b">简</a> <span class="gray9">/</span> <a href="../td/" class="gray9">繁</a></div>
+			</div>
+		</div>
+	</div>
+	<div class="mainview4"></div>
+</div>
+
+<div id="mainboxe" class="clearfix" style="min-height:1400px;height:auto;">
+	<div class="container2">
+		<ul class="contact clearfix mb30">
+			<li>
+				<div class="tc"><img src="images/img37.png" /></div>
+				<h2>营运据点</h2>
+			  <p class="fs18">London, United Kingdom<br/>
+- Hampstead&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Hammersmith & Fulham<br/>
+- Wandsworth&nbsp;&nbsp;&nbsp;- Kensington & Chelsea<br/>
+- Wimbledon&nbsp;&nbsp;&nbsp;&nbsp;- Twickenham</p>
+			</li>
+			<li>
+				<div class="tc"><img src="images/img38.png" /></div>
+				<h2>联系方式</h2>
+				<p><a href=mailto:MandarinGOUK@hotmail.com  class="gray6">Email：MandarinGOUK@hotmail.com</a><br/><a href="https://www.facebook.com/MandarinGoUK/" target="_blank" class="gray6">Facebook: Mandarin GO</a></p>
+			</li>
+			<li style="margin:0;">
+				<div class="tc"><img src="images/img39.png" /></div>
+				<h2>商务合作</h2>
+				<p>Mandarin Go 整合专业教学内容与在地化资源，为更多学员提供优质的中文学习环境。</p>
+				<div class="wayto"><a href=mailto:MandarinGOUK@hotmail.com>Email：MandarinGOUK@hotmail.com</div>
+			</li>
+		</ul>
+		<div class="message mb20 clearfix">
+<!--			<h2 class="tc mb30 mt30">发送邮件</h2>
+-->			<div class="" style="margin:80px 200px 0 200px;">
+			  <div class="">
+				  <p class="mb30 mt20 fs18 tc" style="line-height:52px;">
+欢迎来信咨询关于课程、洽谈合作、或是加入团队！<br/>
+<span style="font-weight:bold;font-size:24px;color:#0fb6ef;">请Email来信至：</span><a href=mailto:MandarinGOUK@hotmail.com style="font-weight:bold;font-size:24px;">MandarinGOUK@hotmail.com</a></p>
+                  <p class="tc mb30"><img src="images/img45.png" /></p>
+					<p class="fs18 gray6 tc" style="line-height:40px;">信件内容请注明：姓联系方式（email、电话）、以及咨询内容。<br/>感谢您！</p></div>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<div id="foot">
+	<div class="footbox clearfix" >
+		<div class="contact">
+			<a href="https://www.facebook.com/MandarinGoUK/" class="facebook" title="facebook" target="_blank"></a>
+		</div>
+		<div class="copyright">© 2020 Mandarin Go Ltd. All Rights Reserved</div>
+		<a href="mailto:MandarinGOUK@hotmail.com" class="linklogo"></a>
+	</div>
+</div>
+</body>
+</html>
