@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Mandarin Go Chinese Language and Cultural Workshop - News - Mandarin GO</title>
+<meta name="keywords" content="快乐学中文" />
+<meta name="description" content="快乐学中文">
+<link href="../css/main.css" rel="stylesheet" type="text/css" />
+<link href="../css/reset.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="images/favicon.ico" type="images/favicon.ico">
+<script type="text/javascript" src="../js/admin.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" ></script>
+<script type="text/javascript">
+    var imgUrl = 'images/01.jpg'; 
+    var descContent = 'Mandarin Go Chinese Language and Cultural Workshop';
+    var shareTitle = 'Mandarin GO - Fun Learn Grow';
+    var appid = '';
+
+    $.ajax({
+        type : 'POST',
+        url :  "http://dev.mymax.cn/running/comm/weixin/open/jsSDKConfig", 
+        dataType : "json",
+        data:{url:window.location.href},
+        success : function(response){
+             var appId = response.s.appId;
+                var timestamp = response.s.timeStamp;
+                var nonceStr = response.s.nonceStr;
+                var signature = response.s.signature;
+
+                wx.config({
+                    debug: false,
+                    appId: appId,
+                    timestamp: timestamp,
+                    nonceStr: nonceStr,
+                    signature: signature,
+                    jsApiList: [
+                        'checkJsApi',
+                        'onMenuShareTimeline',
+                        'onMenuShareAppMessage'
+                    ]
+                });
+                 wx.ready(function() {
+                         
+                        wx.onMenuShareTimeline({
+                            title: shareTitle, // 分享标题
+                            link: lineLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                            imgUrl: imgUrl, // 分享图标
+                            success: function () {
+                                // 用户确认分享后执行的回调函数
+                            },
+                            cancel: function () {
+                                // 用户取消分享后执行的回调函数
+                            }
+                        });
+                        wx.onMenuShareAppMessage({
+                            title: shareTitle, // 分享标题
+                            desc: descContent, // 分享描述
+                            link: lineLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                            imgUrl: imgUrl, // 分享图标
+                            type: '', // 分享类型,music、video或link，不填默认为link
+                            dataUrl:'' , // 如果type是music或video，则要提供数据链接，默认为空
+                            success: function () {
+                                // 用户确认分享后执行的回调函数
+                                
+                            },
+                            cancel: function () {
+                                // 用户取消分享后执行的回调函数
+                            }
+                        });
+                });
+        },
+        error:function(response){
+            window.parent.growl("删除失败["+response.responseText+"]!","error");
+        }
+    });
+</script>
+</head>
+
+<body>
+<img src="images/01.jpg" width="0" height="0" />
+<div id="head">
+	<div class="navbox">
+		<div class="nav">
+			<a href="/en/" class="logo" title="Mandarin GO 快乐学中文"></a>
+			<div class="list">
+				<ul class="toolbar">
+					<li><a href="/en/">Home</a></li>
+					<li><a href="/en/about.html">About</a></li>
+					<li><a href="/en/curriculum.html">Curriculum</a></li>
+					<li><a href="/en/resource.html">Resource</a></li>
+					<li><a href="/en/contact.html">Contact</a></li>
+				</ul>
+				<div class="lanshift"><a href="/" class="blue b">EN</a> <span class="gray9">/</span> <a href="../cn/" class="gray9">简</a> <span class="gray9">/</span> <a href="../td/" class="gray9">繁</a></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cirbox clearfix">
+	<div class="container">
+		<h2 class="tl mb20">Mandarin Go Chinese Language and Cultural Workshop</h2>
+		<div class="detailtime clearfix">
+			<div class="opentime" style="border:none;">Date: 2019-05-15</div>
+		</div>
+		<p class="tl mb20">On the 26th of April 2019, Mandarin Go Ltd. held its first Chinese language and cultural workshop in collaboration with Burgh House. This event was themed “Spring" to welcome the season to London and involved activities such as Chinese ink painting and singing. The event filled Burgh House’s beautiful, historic hall with children’s laughter and created an immersive learning atmosphere. </p>
+		<p class="mb20"><img src="images/01.jpg" /></p>
+		<p class="tl mb20">The workshop was the first of a series, and was the result of three month of work between Mandarin Go Ltd. and Burgh House. Our team on the day comprised on three experienced teachers and one photographer, all working with the goal of integrating Chinese culture, Chinese characters, art, and creativity into the workshop. </p>
+		<p class="tl mb20">Children present learned some interesting Chinese characters such as spring (春), bird (鳥), flower (花) through songs, arts and crafts. They also enjoyed drawing their own Chinese ink paintings through Chinese calligraphy. This meaningful memory was captured on their unique artworks. </p>
+		<p class="mb20"><img src="images/02.jpg" /></p>
+		<p class="mb20"><img src="images/03.jpg" /></p>
+		<p class="tl mb20">“Teachers are friendly and professional, we enjoyed the play, songs, art, and crafts to learn Mandarin”, “The event is great, and we hope that there is more event like this in the future”, were some of the feedback we received from the parents! We’re very grateful to have this opportunity to interact with the children and their parents, and we would like to thank the team at Burgh House & Hampstead Museum for the opportunity received.</p>
+	</div>
+</div>
+
+<div id="foot">
+	<div class="footbox clearfix" >
+		<div class="contact">
+			<a href="https://www.facebook.com/MandarinGoUK/" class="facebook" title="facebook"  target="_blank"></a>
+		</div>
+		<div class="copyright">© 2019 Mandarin Go Ltd. All Rights Reserved</div>
+		<a href="mailto:MandarinGOUK@hotmail.com" class="linklogo"></a>
+	</div>
+</div>
+</body>
+</html>

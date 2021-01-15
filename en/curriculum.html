@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Curriculum - Mandarin GO - Fun Learn Grow</title>
+<meta name="keywords" content="Mandarin, Chinese, mandaringo, children education, Chinese Language, Chinese culture, London, United Kingdom, UK, Fun, Learn, grown,Education, education centre, language centre, academy, institution " />
+<meta name="description" content="The best Chinese Language and culture centre for children"><link rel="shortcut icon" href="images/favicon.ico" type="images/favicon.ico">
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/admin.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" ></script>
+<script type="text/javascript">
+    var imgUrl = 'images/soview.png'; 
+    var descContent = 'Chinese Language and Culture Learning Centre for Children';
+    var shareTitle = 'Mandarin GO - Fun Learn Grow';
+    var appid = '';
+
+    $.ajax({
+        type : 'POST',
+        url :  "http://dev.mymax.cn/running/comm/weixin/open/jsSDKConfig", //这个地址并非通用且长期有效，请去微信官方查看文档，并自行配置
+        dataType : "json",
+        data:{url:window.location.href},
+        success : function(response){
+             var appId = response.s.appId;
+                var timestamp = response.s.timeStamp;
+                var nonceStr = response.s.nonceStr;
+                var signature = response.s.signature;
+
+                wx.config({
+                    debug: false,
+                    appId: appId,
+                    timestamp: timestamp,
+                    nonceStr: nonceStr,
+                    signature: signature,
+                    jsApiList: [
+                        'checkJsApi',
+                        'onMenuShareTimeline',
+                        'onMenuShareAppMessage'
+                    ]
+                });
+                 wx.ready(function() {
+                         
+                        wx.onMenuShareTimeline({
+                            title: shareTitle, // 分享标题
+                            link: lineLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                            imgUrl: imgUrl, // 分享图标
+                            success: function () {
+                                // 用户确认分享后执行的回调函数
+                            },
+                            cancel: function () {
+                                // 用户取消分享后执行的回调函数
+                            }
+                        });
+                        wx.onMenuShareAppMessage({
+                            title: shareTitle, // 分享标题
+                            desc: descContent, // 分享描述
+                            link: lineLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                            imgUrl: imgUrl, // 分享图标
+                            type: '', // 分享类型,music、video或link，不填默认为link
+                            dataUrl:'' , // 如果type是music或video，则要提供数据链接，默认为空
+                            success: function () {
+                                // 用户确认分享后执行的回调函数
+                                
+                            },
+                            cancel: function () {
+                                // 用户取消分享后执行的回调函数
+                            }
+                        });
+                });
+        },
+        error:function(response){
+            window.parent.growl("删除失败["+response.responseText+"]!","error");
+        }
+    });
+</script>
+</head>
+
+<body>
+<img src="images/soview.png" width="0" height="0" />
+<div id="head">
+	<div class="navbox">
+		<div class="nav">
+			<a href="/" class="logo" title="Mandarin GO"></a>
+			<div class="list">
+				<ul class="toolbar">
+					<li><a href="/">Home</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="curriculum.html" class="now">Curriculum</a></li>
+					<li><a href="resource.html">Resource</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+				<div class="lanshift"><a href="/" class="blue b">EN</a> <span class="gray9">/</span> <a href="../cn/" class="gray9">简</a> <span class="gray9">/</span> <a href="../td/" class="gray9">繁</a></div>
+			</div>
+		</div>
+	</div>
+	<div class="mainview3"></div>
+</div>
+
+<div>
+<div id="mainboxe" class="clearfix">
+	<ul class="currbox">
+		<li class="total">
+			<p>Mandarin Go provides a structured curriculum paired with unique teaching methods to nurture children in an immersive environment.</p>
+			<div class="circle"></div>
+		</li>
+		<li>
+			<a href="http://bit.ly/MGInterestSurveyForm">
+			<div class="curcon">
+				<h2>Beginner</h2>
+				<div><img src="images/img26.jpg" /></div>
+				<p class="descrip">In company with their parents, children can nurture their interests in the language through our immersive learning environment, learning and growing alongside other children and parents.</p>
+				<p class="age">Recommended for children <span class="b">ages 1+</span></p>
+				<div class="scircle1"></div>
+			</div>
+			</a>
+		</li>
+		<li style="margin:0;">
+			<a href="http://bit.ly/MGInterestSurveyForm">
+			<div class="curcon">
+				<h2>Elementary</h2>
+				<div><img src="images/img24.jpg" /></div>
+				<p class="descrip">
+Children will develop their familiarity with Mandarin through songs, nursery rhymes and storytelling. The teacher nurtures their capabilities in the language through greetings and awareness of their environment.</p>
+				<p class="age">Recommended for children <span class="b">ages 3+</span></p>
+				<div class="scircle2"></div>
+			</div>
+			</a>
+		</li>
+		<li>
+			<a href="http://bit.ly/MGInterestSurveyForm">
+			<div class="curcon">
+				<h2>Intermediate</h2>
+				<div><img src="images/img25.jpg" /></div>
+				<p class="descrip">Children are encouraged to respond using Mandarin, comprehend basic conversational vocabulary and differentiate everyday words, through a lively and dynamic teaching environment.</p>
+				<p class="age">Recommended for children <span class="b">ages 5+</span></p>
+				<div class="scircle3"></div>
+			</div>
+			</a>
+		</li>
+		<li>
+			<a href="http://bit.ly/MGInterestSurveyForm">
+			<div class="curcon">
+				<h2>Upper Intermediate</h2>
+				<div><img src="images/img27.jpg" /></div>
+				<p class="descrip">Suitable for children who would like to further nurture their fluency in the language, through using Mandarin to respond, describe topics of interest, as well as reading and writing simple sentences.</p>
+				<p class="age">Recommended for children <span class="b">ages 8+</span></p>
+				<div class="scircle4"></div>
+			</div>
+			</a>
+		</li>
+		<li style="margin:0;">
+			<a href="http://bit.ly/MGInterestSurveyForm">
+			<div class="curcon">
+				<h2>Advanced</h2>
+				<div><img src="images/img28.jpg" /></div>
+				<p class="descrip">Suitable for the children of native Mandarin speakers, as the level teaches children to use Mandarin with confidence in conversation, developing their understanding of specific and abstract topics, as well as reading short paragraphs and writing letters and diaries.</p>
+				<p class="age">Recommended for children <span class="b">ages 8+</span></p>
+				<div class="scircle5"></div>
+			</div>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div id="mainboxc" class="clearfix" style="background:#fff;">
+	<div class="tit" style="padding-bottom:20px;">
+		<h1 class="mb30">Featured Themes </h1>
+		<p class="fs18" style="line-height:32px;">A wide range of topics are covered beginning with basic greetings and self-introduction to learning about school life, communities and occupations. Our curriculum and activities are structured and designed based on the children’s daily and social experiences to increase their social, community and self-awareness while learning a new language.</p>
+	</div>
+	<ul>
+		<li>
+			<div class="mb"><img src="images/img04.png" /></div>
+			<p>Basic knowledge</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img05.png" /></div>
+			<p>About myself</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img06.png" /></div>
+			<p>My family</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img07.png" /></div>
+			<p>School life</p>
+		</li>
+		<li style="margin:0;">
+			<div class="mb"><img src="images/img08.png" /></div>
+			<p>Community</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img09.png" /></div>
+			<p>Occupations</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img10.png" /></div>
+			<p>Animals</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img11.png" /></div>
+			<p>Our environment</p>
+		</li>
+		<li>
+			<div class="mb"><img src="images/img12.png" /></div>
+			<p>Health and foods</p>
+		</li>
+		<li style="margin:0;">
+			<div class="mb"><img src="images/img13.png" /></div>
+			<p>Festivals and celebrations</p>
+		</li>
+	</ul>
+</div>
+
+<div id="mainboxd" class="clearfix" style="background:#f2f2f2;">
+	<div class="tit" style="padding-bottom:20px;">
+		<h1 class="mb20">Chinese Cultural Activities and Events</h1>
+	</div>
+	<ul class="classbox">
+		<li>
+			<div class="classbox">
+				<h2>Mandarin Go Open Day</h2>
+				<div><img src="images/classimg04.jpg" /></div>
+				<p class="descrip">
+Date： Saturday, 23 March<br/>
+Time： 10:30-11:30<br/>
+Location： Hampstead Community Centre<br/>
+Address： 78 Hampstead High St, Hampstead, London NW3 1RE
+</p>
+			</div>
+		</li>
+		<li>
+			<div class="classbox">
+				<h2>Traditional Chinese New Year</h2>
+				<div><img src="images/classimg02.jpg" /></div>
+				<p class="descrip">Date： Saturday, 3 February<br/>
+Time： 11:00-16:00<br/>
+Location： Burgh House & Hampstead Museum<br/>
+Address： New End Square, Hampstead, London NW3 1LT
+</p>
+			</div>
+		</li>
+		<li style="margin:0;">
+			<div class="classbox">
+				<h2>The Best Bear Colouring Competition</h2>
+				<div><img src="images/classimg06.jpg" /></div>
+				<p class="descrip" style="font-size:14px;line-height:22px;">
+Date： From now until 29 March, 2019<br/>
+How to participate：<br/>
+1. <a href="http://mandaringo.ek21.com/en/resource/a08.jpg" target="_blank">Download artwork here</a><br/>
+2. Complete it and post it to us with your details<br/>
+Where to hand in our artwork：<br/>
+1. Message us on our <a href="https://www.facebook.com/MandarinGoUK/" target="_blank">FB page</a><br/>
+2. Email to us: <a href="mailto:MandarinGOUK@hotmail.com">MandarinGOUK@hotmail.com</a>
+</p>
+			</div>
+		</li>
+		<li>
+			<a href="http://bit.ly/MGWorkshopForm">
+			<div class="classbox">
+				<h2>Mandarin and Chinese Cultural Workshop for Children</h2>
+				<div><img src="images/classimg05.jpg" /></div>
+				<p class="descrip">Date： Friday, 26 April, 24 May, 28 June<br/>
+Time： 16:00 - 17:00<br/>
+Location： Burgh House & Hampstead Museum<br/>
+Address： New End Square, Hampstead, London NW3 1LT<br/>
+Limited spaces available, booking advised.<br/>
+</p>
+			</div>
+			</a>
+		</li>
+		<li>
+			<div class="classbox">
+				<h2>Traditional Chinese Folk Activities and Toys</h2>
+				<div><img src="images/classimg03.jpg" /></div>
+				<p class="descrip">Mandarin Go provide different traditional Chinese folk activities and toys for children and parents to experience. Please email us if interested, thank you. </p>
+			</div>
+		</li>
+		<li style="margin:0;">
+			<a href="http://bit.ly/MGSummerHolidayCamp">
+			<div class="classbox">
+				<h2>Fun Learn Chinese Holiday Camp</h2>
+				<div><img src="images/classimg01.jpg" /></div>
+				<p class="descrip"><!--Week 1：22 July – 26 July<br/> 
+Week 2：29 July – 2 August<br/> -->
+Time：9:30-12:30 / 9:30 - 15:30<br/>
+Note：Mandarin Go provide early drop off and late pick up service with additionalfees, please email us for more information, thank you.
+</p>
+			</div>
+			</a>
+		</li>
+	</ul>
+</div>
+</div>
+
+<div id="foot">
+	<div class="footbox clearfix" >
+		<div class="contact">
+			<a href="https://www.facebook.com/MandarinGoUK/" class="facebook" title="facebook" target="_blank"></a>
+		</div>
+		<div class="copyright">© 2019 Mandarin Go Ltd. All Rights Reserved</div>
+		<a href="mailto:MandarinGOUK@hotmail.com" class="linklogo"></a>
+	</div>
+</div>
+<!--<div id="black_overlay" class="black_overlay" style="display:block;position:fixed;"></div>
+<div id="white_content" class="white_content" style="display:block;">
+	<div class="white_box">
+		<span class="closelay"></span>
+		<div class="tc">	
+			<img src="act/images/act01.jpg" border="0" usemap="#Map" />
+			<map name="Map" id="Map">
+			  <area shape="rect" coords="272,404,588,452" href="act/curriculum01.html"  style="outline:none;"/>
+			</map>
+	  </div>
+	</div>
+</div>
+<script type="text/javascript">
+
+$(".closelay").click( function () { 
+	$("#black_overlay").hide();
+	$("#white_content").hide();
+
+ });
+$(".black_overlay").click( function () { 
+	$("#black_overlay").hide();
+	$("#white_content").hide();
+
+ });
+</script> -->
+</body>
+</html>

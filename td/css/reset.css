@@ -1,0 +1,169 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*css reset star*/
+* 									{font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;margin:0;padding:0;}
+html,body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,
+dl,dt,dd,ul,ol,li,pre,form,fieldset,
+legend,button,input,textarea,th,td	{margin:0;padding:0;}
+body,button,input,select,textarea	{font:14px/1.5 tahoma, arial, \5b8b\4f53;color:#333;/*font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;*/}
+h1,h2,h3,h4,h5,h6					{font-size:100%;}
+address,cite,dfn,em,var				{font-style:normal;}
+code,kbd,pre,samp					{font-family:courier new, courier, monospace;}
+small								{font-size:12px;}
+ul,ol								{list-style:none;}
+a									{text-decoration:none;color:#333;}
+a:hover								{color:#0fb6ef;}
+sup									{vertical-align:text-top;}
+sub									{vertical-align:text-bottom;}
+legend								{color:#000;}
+fieldset,
+img									{border:0;}
+button,
+input,
+select,
+textarea							{font-size:100%;font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;}
+table								{border-collapse:collapse;border-spacing:0;}
+
+strong								{font-weight:bold;}
+input[type=submit]					{cursor:pointer;}
+button								{cursor:pointer;}
+body								{min-width:1230px}
+/*css reset end*/
+
+.hr 								{font-size:1px;line-height:1px;clear:both;height:10px;}/*留出10像素的间隙*/
+.clear								{clear:both;font-size:0px;height:0px;line-height:0px;}/*清楚ie6 浮动造成的重复文字*/
+.m									{margin:0 auto;}
+.b									{font-weight:bold;}
+span.none-b							{font-weight:normal;}
+.relative							{position:relative;}
+.border_none						{border:none;}
+.display_none						{display:none;}
+
+.clearfix:after						{content:"."; height:0; visibility:hidden; display:block;clear:both;overflow:hidden;}
+.clearfix							{display:inline-block;}
+.clearfix							{display:block;}
+
+/*f_开头为float漂浮,l:左 r:右*/
+.fl									{float:left;}
+.fr									{float:right;}
+
+/*m_开头位margin边距,t:上 b:下 l:左 r:右*/
+.mt									{margin-top:10px;}
+.mb									{margin-bottom:10px;}
+.ml									{margin-left:10px;}
+.mr									{margin-right:10px;}
+
+.ml5								{margin-left:5px;}
+.ml15								{margin-left:15px;}
+.ml20								{margin-left:20px;}
+.mr5								{margin-right:5px;}
+.mr15								{margin-right:15px;}
+.mr20								{margin-right:20px;}
+.mr30								{margin-right:30px;}
+
+.mb40								{margin-bottom:40px;}
+.mb30								{margin-bottom:30px;}
+.mb25								{margin-bottom:25px;}
+.mb20								{margin-bottom:20px;}
+.mb15								{margin-bottom:15px;}
+.mb5								{margin-bottom:5px;}
+.mt5								{margin-top:5px;}
+.mt15								{margin-top:15px;}
+.mt20								{margin-top:20px;}
+.mt30								{margin-top:30px;}
+
+.pa5								{padding:5px;}
+.pa10								{padding:10px;}
+.pa_rl10							{padding:0 10px;}
+.pa8								{padding:8px;}
+
+/*c_开头为字体颜色*/
+.gray								{color:#333;}
+.gray6								{color:#666;}
+.gray9								{color:#999;}
+.blue								{color:#0fb6ef;}
+.red								{color:#f63e53;}
+.error								{color:#bf0000;}
+.green								{color:#090;}
+.orange								{color:#f95e1c;}
+.white								{color:#ffffff;}
+.brown								{color:#55180a;}
+
+a.uline								{text-decoration:underline;}
+
+/*w_开头表示宽度,bdr_为对边框的设置,这两个组合使用*/
+.w720								{width:720px;}
+.w725								{width:725px;}
+.w695								{width:695px;}
+.w280								{width:280px;}
+.w260								{width:260px;}
+.w230								{width:230px;}
+
+/*fh_开头的是行距*/
+.lh18								{line-height:18px;}
+.lh20								{line-height:20px;}
+.lh22								{line-height:22px;}
+.lh24								{line-height:24px;}
+.lh26								{line-height:26px;}
+.lh28								{line-height:28px;}
+.lh30								{line-height:30px;}
+
+/*fs_开头的是字体大小*/
+.fs12								{font-size:12px;}
+.fs14								{font-size:14px;}
+.fs16								{font-size:16px;}
+.fs18								{font-size:18px;}
+.fs20								{font-size:20px;}
+.fs22								{font-size:22px;}
+.fs24								{font-size:24px;}
+
+/*v开头表示垂直对齐方式，t开头横向对齐方式，组合使用*/
+.vt									{vertical-align:top;}
+.vm									{vertical-align:middle;}
+.tc									{text-align:center;}
+.tr									{text-align:right;}
+.tl									{text-align:left;}
+.wp									{word-wrap:break-word;word-break:normal;}/*字符串不换行*/
+
+/*最小高度*/
+.mh600								{min-height:600px;height:auto !important;height:600px;overflow:visible;}
+
+/*图片隐藏*/
+.img_h,
+.img_hidden							{display:block;overflow:hidden;text-align:center;}
+.img_box							{display:block;}
+
+/*价格*/
+.pice								{font-size:12px;font-weight:bold;color:#ff6000;font-family:Arial, Helvetica, sans-serif;}
+.pice_i								{background:url(../images/title_icon.gif) no-repeat 0px -86px;padding-left:10px;font-size:16px;font-weight:bold;color:#bf0000;font-family:Arial, Helvetica, sans-serif;}
+.pice_del							{font-family:Arial,Helvetica,sans-serif;text-decoration:line-through;color:#666;}
+.s_icon								{border:1px solid #ff8217;background:url(../images/s.png) no-repeat;padding-left:18px;height:15px;margin-left:5px;}
+.s_icon	strong						{font-size:12px;display:block;height:15px;float:left;line-height:15px;padding:0 2px;}
+.bk									{display:table-cell;display:inline-block;*display:inline;zoom:1;vertical-align:top;}
+
+/*page*/
+.page a,
+.page span.no,
+.page .page_number					{height:34px;line-height:34px;padding:0 13px;font-size:14px;display:table-cell;display:inline-block;*display:inline;zoom:1;vertical-align:top;border:1px solid #cccccc;margin:0 6px;background:#fff;}
+.page a:hover,.page a.hover			{border:1px solid #3980c9;background:#3980c9;color:#FFF;}
+.page span.no						{color:#ccc;}
+
+.page .pgup,
+.page .pgup:hover					{background:#FFF url(../images/i3.gif) no-repeat center 7px;line-height:200px;overflow:hidden;padding:0;width:24px;}
+.page .pgdn,
+.page .pgdn:hover					{background:#FFF url(../images/i2.gif) no-repeat center 7px;line-height:200px;overflow:hidden;padding:0;width:24px;}
+.page .page_number					{border:none;background:none;padding:0;}
+
+.container							{width:100%;height:410px;overflow:hidden;position:relative;text-align:center;}
+.slider								{position:absolute;width:10000px;}
+.slider li							{list-style:none;display:inline;float:left;text-align:center;}
+.slider img							{width:1500px;height:410px;display:block; text-align:center;}
+.slider2							{width:2000px;}
+.slider2 li							{float:left;}
+.num								{position: relative;margin:0 auto;top:387px;background:url(../images/dot_03.png);width:139px;height:23px;padding-left:46px;}
+.num li								{float:left;width:13px;height:13px;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9px;cursor:pointer;overflow:hidden;margin:6px 4px;background:url(../images/dot_09.png);}
+.num li.on							{color:#fff;width:13px;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9px;height:13px;margin:6px 4px;background:url(../images/dot_07.png);font-weight:bold;}
+
+
+
