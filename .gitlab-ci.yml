@@ -14,4 +14,4 @@ pages:
   only:
     - master
   after_script:
-    - lftp -c "set ftp:ssl-allow no; open -u $USERNAME,$PASSWORD $HOST; mirror -Rev public/ ./ --ignore-time --parallel=10 --exclude-glob .git* --exclude .git/"
+    - lftp -c "set ftp:ssl-allow no; open -u $USERNAME,$PASSWORD $HOST; mirror -Rev public/ ./mandaringo --ignore-time --parallel=10 --exclude-glob .git* --exclude .git/"
