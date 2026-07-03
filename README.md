@@ -63,12 +63,18 @@ The contact form posts directly to Formspree from the browser — no server code
 
 1. Create a form at [formspree.io](https://formspree.io) and copy its form ID (the part
    after `/f/` in the endpoint URL).
-2. Copy `.env.example` to `.env.local` and set:
+2. Set it in `.env` (already present in this repo, and intentionally **not** gitignored —
+   `NEXT_PUBLIC_FORMSPREE_ID` is a client-exposed, non-secret value, so it's fine to commit
+   it alongside the code instead of configuring it per-environment):
    ```
    NEXT_PUBLIC_FORMSPREE_ID=your_form_id
    ```
-3. On Vercel, add the same `NEXT_PUBLIC_FORMSPREE_ID` environment variable under
-   **Project Settings → Environment Variables** for Production/Preview.
+   `.env.example` is kept as a template only; `.env.local` (still gitignored) can be used
+   to override it locally without touching the committed value.
+3. Vercel picks up the committed `.env` automatically at build time — no dashboard
+   configuration needed unless you want a different form ID per environment, in which case
+   set `NEXT_PUBLIC_FORMSPREE_ID` under **Project Settings → Environment Variables**
+   (it takes precedence over the committed `.env`).
 
 Until this is configured, the form still renders and validates normally, but submitting
 it shows a message asking visitors to email `info@mandaringo.co.uk` directly instead of
