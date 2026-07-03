@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-tc), var(--font-sc), system-ui, -apple-system, sans-serif;
+  color: #233044;
+  background-color: #fffdf8;
+}
+
+html[lang="zh-Hans"] body {
+  font-family: var(--font-sc), var(--font-tc), system-ui, -apple-system, sans-serif;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display), var(--font-tc), var(--font-sc), system-ui, sans-serif;
+}
+
+::selection {
+  background-color: #b3e9ff;
+  color: #134d6b;
+}
+
+.container-px {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+}
+
+.section-kicker {
+  @apply inline-flex items-center gap-2 rounded-full bg-sky-100 px-4 py-1.5 text-sm font-semibold tracking-wide text-sky-700;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-coral-500 px-7 py-3.5 text-base font-bold text-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-coral-600 hover:shadow-lg active:translate-y-0;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-sky-500 bg-white px-7 py-3.5 text-base font-bold text-sky-600 transition-all duration-200 hover:-translate-y-0.5 hover:bg-sky-50 active:translate-y-0;
+}
+
+.card {
+  @apply rounded-2xl bg-white shadow-card ring-1 ring-black/5;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.blob-bg {
+  border-radius: 60% 40% 55% 45% / 55% 60% 40% 45%;
+}
+
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(15, 182, 239, 0.18) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
