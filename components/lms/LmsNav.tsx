@@ -23,7 +23,7 @@ export async function LmsNav() {
           </Link>
           {session?.user && (
             <Link href="/dashboard" className="hover:text-sky-600">
-              我的主頁
+              會員中心
             </Link>
           )}
           {isAdmin && (

@@ -11,14 +11,18 @@ export default async function OnboardingPage() {
   if (!session?.user) redirect("/login?callbackUrl=/onboarding");
   if (session.user.hasProfile) redirect("/dashboard");
 
+  const isAdminAccount = session.user.role === "ADMIN" || session.user.role === "SUPER_ADMIN";
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white px-4 py-16">
       <Card className="mx-auto max-w-2xl">
         <CardContent className="pt-6">
           <h1 className="text-center text-2xl font-extrabold text-slate-900">完成帳號設定</h1>
-          <p className="mt-1 text-center text-sm text-slate-500">請選擇您的身份並填寫基本資料</p>
+          <p className="mt-1 text-center text-sm text-slate-500">
+            {isAdminAccount ? "請填寫您的老師身分基本資料" : "請選擇您的身份並填寫基本資料"}
+          </p>
           <div className="mt-8">
-            <OnboardingView />
+            <OnboardingView isAdminAccount={isAdminAccount} />
           </div>
         </CardContent>
       </Card>

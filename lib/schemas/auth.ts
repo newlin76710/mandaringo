@@ -80,7 +80,10 @@ export const onboardingSchema = z.discriminatedUnion("role", [
   z.object({ role: z.literal("PARENT"), profile: parentProfileSchema }),
   z.object({
     role: z.literal("TEACHER"),
-    teacherAccessCode: z.string().min(1, "請輸入老師註冊密碼"),
+    // Optional here (unlike registerSchema): an Admin/Super Admin completing their
+    // default Teacher profile doesn't need the access code — see completeOnboarding,
+    // which enforces it server-side only for accounts that aren't already Admin+.
+    teacherAccessCode: z.string().optional(),
     profile: teacherProfileSchema,
   }),
 ]);

@@ -11,8 +11,14 @@ const ROLE_OPTIONS: { role: RegisterableRole; title: string; desc: string; icon:
   { role: "TEACHER", title: "我是老師", desc: "開課、點名、審核請假", icon: BookOpen },
 ];
 
-export function OnboardingView() {
-  const [role, setRole] = useState<RegisterableRole | null>(null);
+export function OnboardingView({ isAdminAccount = false }: { isAdminAccount?: boolean }) {
+  const [role, setRole] = useState<RegisterableRole | null>(isAdminAccount ? "TEACHER" : null);
+
+  // Admin/Super Admin default to a Teacher profile — no picker, no access code needed
+  // (they're already a trusted account).
+  if (isAdminAccount) {
+    return <TeacherOnboardingForm requireAccessCode={false} />;
+  }
 
   if (!role) {
     return (

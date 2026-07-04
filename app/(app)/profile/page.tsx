@@ -18,7 +18,6 @@ function toDateInput(date: Date) {
 export default async function ProfilePage() {
   const session = await auth();
   if (!session?.user) redirect("/login?callbackUrl=/profile");
-  if (!session.user.hasProfile) redirect("/onboarding");
 
   const profile = await getMyProfile();
   if (!profile) redirect("/onboarding");
@@ -32,7 +31,7 @@ export default async function ProfilePage() {
 
         <Card className="mt-6">
           <CardContent className="pt-6">
-            {profile.role === "STUDENT" && (
+            {profile.type === "STUDENT" && (
               <StudentProfileEditForm
                 defaultValues={{
                   chineseFirstName: profile.data.chineseFirstName,
@@ -51,7 +50,7 @@ export default async function ProfilePage() {
                 }}
               />
             )}
-            {profile.role === "PARENT" && (
+            {profile.type === "PARENT" && (
               <ParentProfileEditForm
                 defaultValues={{
                   chineseFirstName: profile.data.chineseFirstName,
@@ -72,7 +71,7 @@ export default async function ProfilePage() {
                 }}
               />
             )}
-            {profile.role === "TEACHER" && (
+            {profile.type === "TEACHER" && (
               <TeacherProfileEditForm
                 defaultValues={{
                   chineseFirstName: profile.data.chineseFirstName,

@@ -16,7 +16,10 @@ export const dynamic = "force-dynamic";
 export default async function LeavePage() {
   const session = await auth();
   if (!session?.user) redirect("/login?callbackUrl=/leave");
-  if (!session.user.hasProfile) redirect("/onboarding");
+  // Admin/Super Admin have no profile to complete — only Student/Parent/Teacher do.
+  if (session.user.role !== "ADMIN" && session.user.role !== "SUPER_ADMIN" && !session.user.hasProfile) {
+    redirect("/onboarding");
+  }
 
   const isReviewer = ["TEACHER", "ADMIN", "SUPER_ADMIN"].includes(session.user.role);
 

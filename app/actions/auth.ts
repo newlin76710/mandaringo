@@ -71,9 +71,19 @@ export async function completeOnboarding(input: unknown) {
   if (!session?.user?.id) return { error: "請先登入" };
   if (session.user.hasProfile) return { error: "您已完成資料填寫" };
 
+  // Admin/Super Admin default to a Teacher identity: they skip the role picker (see
+  // OnboardingView), don't need the teacher access code (they're already trusted), and
+  // keep their elevated role instead of being downgraded to plain "TEACHER".
+  const isAdminAccount = session.user.role === "ADMIN" || session.user.role === "SUPER_ADMIN";
+
   const parsed = onboardingSchema.safeParse(input);
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   const { role, profile } = parsed.data;
+
+  if (isAdminAccount && role !== "TEACHER") {
+    return { error: "管理員帳號僅能建立老師身分的個人資料" };
+  }
+
   const userId = session.user.id;
   const email = session.user.email ?? "";
 
@@ -83,15 +93,18 @@ export async function completeOnboarding(input: unknown) {
   } else {
     const taken = await prisma.teacher.findUnique({ where: { email } });
     if (taken) return { error: "此 Email 已被使用，請聯繫行政人員協助合併帳號" };
-    const validCode = await verifyTeacherAccessCode(parsed.data.teacherAccessCode);
-    if (!validCode) return { error: "老師註冊密碼錯誤，請向行政人員確認" };
+    if (!isAdminAccount) {
+      if (!parsed.data.teacherAccessCode) return { error: "請輸入老師註冊密碼" };
+      const validCode = await verifyTeacherAccessCode(parsed.data.teacherAccessCode);
+      if (!validCode) return { error: "老師註冊密碼錯誤，請向行政人員確認" };
+    }
   }
 
   await prisma.$transaction(async (tx) => {
     await tx.user.update({
       where: { id: userId },
       data: {
-        role,
+        role: isAdminAccount ? session.user.role : role,
         name: `${profile.chineseLastName}${profile.chineseFirstName}`,
         emailVerified: new Date(),
       },

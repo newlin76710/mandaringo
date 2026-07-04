@@ -6,15 +6,32 @@ import { LmsNav } from "@/components/lms/LmsNav";
 import { StudentDashboard } from "@/components/lms/dashboard/StudentDashboard";
 import { ParentDashboard } from "@/components/lms/dashboard/ParentDashboard";
 import { TeacherDashboard } from "@/components/lms/dashboard/TeacherDashboard";
+import { AdminDashboard } from "@/components/lms/dashboard/AdminDashboard";
 
-export const metadata: Metadata = { title: "我的主頁 - Mandarin Go" };
+export const metadata: Metadata = { title: "會員中心 - Mandarin Go" };
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const session = await auth();
   if (!session?.user) redirect("/login?callbackUrl=/dashboard");
+
+  // Admin/Super Admin are pure account roles with no Student/Parent/Teacher profile to
+  // fill in, so they skip the onboarding/hasProfile gate entirely and land on a member
+  // center that surfaces a way into the back office — they should never be silently
+  // redirected straight into /admin (that made the "front stage" link feel broken, since
+  // it just bounced back).
+  if (session.user.role === "ADMIN" || session.user.role === "SUPER_ADMIN") {
+    return (
+      <div className="min-h-screen bg-slate-50">
+        <LmsNav />
+        <div className="mx-auto max-w-4xl px-4 py-10">
+          <AdminDashboard name={session.user.name ?? session.user.email ?? "使用者"} role={session.user.role} />
+        </div>
+      </div>
+    );
+  }
+
   if (!session.user.hasProfile) redirect("/onboarding");
-  if (session.user.role === "ADMIN" || session.user.role === "SUPER_ADMIN") redirect("/admin");
 
   return (
     <div className="min-h-screen bg-slate-50">

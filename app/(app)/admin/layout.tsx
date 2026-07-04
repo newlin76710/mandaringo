@@ -12,8 +12,10 @@ const ALLOWED_ROLES = ["TEACHER", "ADMIN", "SUPER_ADMIN"];
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
   if (!session?.user) redirect("/login?callbackUrl=/admin");
-  if (!session.user.hasProfile) redirect("/onboarding");
   if (!ALLOWED_ROLES.includes(session.user.role)) redirect("/dashboard");
+  // Admin/Super Admin default to a Teacher profile (see completeOnboarding) — everyone
+  // in this layout is expected to have completed one.
+  if (!session.user.hasProfile) redirect("/onboarding");
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -25,7 +27,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           </Link>
           <div className="flex items-center gap-3">
             <Link href="/dashboard" className="text-sm font-semibold text-slate-500 hover:text-sky-600">
-              前台首頁
+              會員中心
             </Link>
             <UserMenu name={session.user.name ?? session.user.email ?? "使用者"} roleLabel={ROLE_LABELS[session.user.role]} />
           </div>

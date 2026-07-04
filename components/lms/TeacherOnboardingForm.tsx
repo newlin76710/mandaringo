@@ -15,15 +15,17 @@ import { GenderSelect } from "@/components/lms/GenderSelect";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-const schema = z
-  .object({ teacherAccessCode: z.string().min(1, "請輸入老師註冊密碼") })
-  .and(teacherProfileSchema);
-type FormValues = TeacherProfileInput & { teacherAccessCode: string };
+type FormValues = TeacherProfileInput & { teacherAccessCode?: string };
 
-export function TeacherOnboardingForm() {
+export function TeacherOnboardingForm({ requireAccessCode = true }: { requireAccessCode?: boolean }) {
   const router = useRouter();
   const { update } = useSession();
   const [submitting, setSubmitting] = useState(false);
+
+  const schema = requireAccessCode
+    ? z.object({ teacherAccessCode: z.string().min(1, "請輸入老師註冊密碼") }).and(teacherProfileSchema)
+    : z.object({ teacherAccessCode: z.string().optional() }).and(teacherProfileSchema);
+
   const {
     register,
     control,
@@ -71,9 +73,11 @@ export function TeacherOnboardingForm() {
         <FormField label="郵遞區號" required error={errors.postalCode?.message}>
           <Input {...register("postalCode")} />
         </FormField>
-        <FormField label="老師註冊密碼" required error={errors.teacherAccessCode?.message} className="sm:col-span-2">
-          <Input type="password" placeholder="請向行政人員索取" {...register("teacherAccessCode")} />
-        </FormField>
+        {requireAccessCode && (
+          <FormField label="老師註冊密碼" required error={errors.teacherAccessCode?.message} className="sm:col-span-2">
+            <Input type="password" placeholder="請向行政人員索取" {...register("teacherAccessCode")} />
+          </FormField>
+        )}
       </div>
       <p className="text-xs text-slate-400">地址、學歷、緊急聯絡人、履歷簡介等其他資料，之後可以在「會員中心」隨時補填。</p>
       <Button type="submit" size="lg" className="w-full" disabled={submitting}>
