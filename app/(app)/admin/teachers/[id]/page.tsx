@@ -68,7 +68,8 @@ export default async function AdminTeacherDetailPage({ params }: { params: Promi
               emergencyContactPhone: teacher.emergencyContactPhone ?? undefined,
               bio: teacher.bio ?? undefined,
             }}
-            onSave={(profile) => updateTeacherAdmin(teacher.id, profile)}
+            targetId={teacher.id}
+            action={updateTeacherAdmin}
           />
         </CardContent>
       </Card>

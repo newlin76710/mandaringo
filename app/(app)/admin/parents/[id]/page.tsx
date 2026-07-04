@@ -62,7 +62,8 @@ export default async function AdminParentDetailPage({ params }: { params: Promis
               secondaryContactPhone: parent.secondaryContactPhone ?? undefined,
               notes: parent.notes ?? undefined,
             }}
-            onSave={(profile) => updateParentAdmin(parent.id, profile)}
+            targetId={parent.id}
+            action={updateParentAdmin}
           />
         </CardContent>
       </Card>

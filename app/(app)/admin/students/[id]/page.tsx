@@ -78,7 +78,8 @@ export default async function AdminStudentDetailPage({ params }: { params: Promi
               specialNeeds: student.specialNeeds ?? undefined,
               notes: student.notes ?? undefined,
             }}
-            onSave={(profile) => updateStudentAdmin(student.id, profile)}
+            targetId={student.id}
+            action={updateStudentAdmin}
           />
         </CardContent>
       </Card>

@@ -16,11 +16,18 @@ import { Button } from "@/components/ui/button";
 
 export function ParentProfileEditForm({
   defaultValues,
-  onSave,
+  targetId,
+  action,
 }: {
   defaultValues: ParentProfileInput;
-  /** Override the default "update my own profile" action — used by the admin edit page. */
-  onSave?: (profile: ParentProfileInput) => Promise<{ success?: true; error?: string }>;
+  /**
+   * Pass both together to edit someone else's profile (the admin edit page) — `action`
+   * must be a direct reference to a "use server" export, never an inline arrow function
+   * wrapping one, since a Server Component can only hand a Client Component an actual
+   * Server Action reference across the boundary, not a closure created around one.
+   */
+  targetId?: string;
+  action?: (id: string, profile: ParentProfileInput) => Promise<{ success?: true; error?: string }>;
 }) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
@@ -33,7 +40,7 @@ export function ParentProfileEditForm({
 
   async function onSubmit(profile: ParentProfileInput) {
     setSubmitting(true);
-    const result = onSave ? await onSave(profile) : await updateMyProfile(profile);
+    const result = action && targetId ? await action(targetId, profile) : await updateMyProfile(profile);
     setSubmitting(false);
     if (result.error) {
       toast.error(result.error);
