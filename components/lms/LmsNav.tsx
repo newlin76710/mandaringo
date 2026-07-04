@@ -1,0 +1,43 @@
+import Link from "next/link";
+import { auth } from "@/auth";
+import { ROLE_LABELS } from "@/lib/constants";
+import { UserMenu } from "@/components/lms/UserMenu";
+import { Button } from "@/components/ui/button";
+
+export async function LmsNav() {
+  const session = await auth();
+
+  return (
+    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+        <Link href="/courses" className="flex items-center gap-2 font-display font-extrabold text-slate-900">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-sky-500 text-lg text-white">🐼</span>
+          Mandarin Go 學習平台
+        </Link>
+
+        <nav className="flex items-center gap-4 text-sm font-semibold text-slate-600">
+          <Link href="/courses" className="hover:text-sky-600">
+            課程列表
+          </Link>
+          {session?.user && (
+            <Link href="/dashboard" className="hover:text-sky-600">
+              我的主頁
+            </Link>
+          )}
+          {session?.user ? (
+            <UserMenu name={session.user.name ?? session.user.email ?? "使用者"} roleLabel={ROLE_LABELS[session.user.role]} />
+          ) : (
+            <div className="flex items-center gap-2">
+              <Button asChild variant="ghost" size="sm">
+                <Link href="/login">登入</Link>
+              </Button>
+              <Button asChild size="sm">
+                <Link href="/register">註冊</Link>
+              </Button>
+            </div>
+          )}
+        </nav>
+      </div>
+    </header>
+  );
+}

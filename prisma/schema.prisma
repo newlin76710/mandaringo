@@ -1,0 +1,411 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==================== ENUMS ====================
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  TEACHER
+  PARENT
+  STUDENT
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum CourseLevel {
+  LEVEL_1 // 主題中文
+  LEVEL_2 // 漢字好好玩
+  LEVEL_3 // 小學國語
+  LEVEL_4 // 中學華語
+  LEVEL_5 // 大學/成人
+}
+
+enum EnrollmentStatus {
+  PENDING_PAYMENT
+  CONFIRMING
+  ACTIVE
+  CANCELLED
+  WITHDRAWN
+}
+
+enum PaymentStatus {
+  PENDING
+  CONFIRMING
+  PAID
+  CANCELLED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  LATE
+  ABSENT
+  EXCUSED
+}
+
+enum LeaveStatus {
+  SUBMITTED
+  APPROVED
+  REJECTED
+}
+
+enum AuthTokenPurpose {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
+// ==================== AUTH ====================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String?   @unique
+  emailVerified DateTime?
+  passwordHash  String?
+  name          String?
+  image         String?
+  role          Role      @default(STUDENT)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts   Account[]
+  sessions   Session[]
+  authTokens AuthToken[]
+  auditLogs  AuditLog[]
+
+  student Student?
+  teacher Teacher?
+  parent  Parent?
+
+  @@index([role])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Required by @auth/prisma-adapter's typings even though v1 has no Email-magic-link
+// provider configured. Left unused on purpose — see AuthToken for our own
+// verification/reset tokens.
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model AuthToken {
+  id        String           @id @default(cuid())
+  userId    String
+  purpose   AuthTokenPurpose
+  token     String           @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, purpose])
+}
+
+// ==================== PROFILES ====================
+
+model Student {
+  id                 String       @id @default(cuid())
+  userId             String?      @unique
+  studentNumber      String       @unique
+  chineseFirstName   String
+  chineseLastName    String
+  englishFirstName   String
+  englishMiddleName  String?
+  englishLastName    String
+  nickname           String?
+  gender             Gender
+  birthDate          DateTime     @db.Date
+  nationality        String?
+  countryOfResidence String?
+  timezone           String?
+  phone              String?
+  email              String?
+  otherContact       String?
+  level              CourseLevel?
+  chineseBackground  String?
+  allergies          String?
+  specialNeeds       String?
+  notes              String?
+  isActive           Boolean      @default(true)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  user        User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  parents     ParentStudent[]
+  enrollments Enrollment[]
+  attendances Attendance[]
+  leaves      Leave[]
+
+  @@index([isActive])
+}
+
+model Parent {
+  id                    String    @id @default(cuid())
+  userId                String?   @unique
+  chineseFirstName      String
+  chineseLastName       String
+  englishFirstName      String
+  englishLastName       String
+  gender                Gender
+  phone                 String
+  email                 String    @unique
+  otherContact          String?
+  birthDate             DateTime? @db.Date
+  nationality           String?
+  postalCode            String?
+  address               String?
+  occupation            String?
+  educationLevel        String?
+  secondaryContactName  String?
+  secondaryContactPhone String?
+  notes                 String?
+  isActive              Boolean   @default(true)
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user     User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  students ParentStudent[]
+}
+
+model ParentStudent {
+  id           String   @id @default(cuid())
+  parentId     String
+  studentId    String
+  relationship String?
+  isPrimary    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  parent  Parent  @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([parentId, studentId])
+}
+
+model Teacher {
+  id                    String    @id @default(cuid())
+  userId                String?   @unique
+  chineseFirstName      String
+  chineseLastName       String
+  englishFirstName      String
+  englishMiddleName     String?
+  englishLastName       String
+  gender                Gender
+  phone                 String
+  email                 String    @unique
+  birthDate             DateTime? @db.Date
+  nationality           String?
+  registeredAddress     String?
+  residentialAddress    String?
+  postalCode            String?
+  occupation            String?
+  educationLevel        String?
+  emergencyContactName  String?
+  emergencyContactPhone String?
+  bio                   String?
+  isActive              Boolean   @default(true)
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user             User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  primaryCourses   Course[]        @relation("PrimaryTeacher")
+  secondaryCourses CourseTeacher[]
+
+  @@index([isActive])
+}
+
+// ==================== COURSE ====================
+
+model Course {
+  id               String      @id @default(cuid())
+  code             String      @unique
+  name             String
+  description      String?
+  level            CourseLevel
+  fee              Decimal     @db.Decimal(10, 2)
+  currency         String      @default("TWD")
+  startDate        DateTime    @db.Date
+  endDate          DateTime    @db.Date
+  scheduleNote     String?
+  region           String?
+  timezone         String?
+  dayOfWeek        Int?
+  startTime        String?
+  minCapacity      Int         @default(2)
+  maxCapacity      Int         @default(5)
+  materialUrl      String?
+  isPublished      Boolean     @default(false)
+  archivedAt       DateTime?
+  primaryTeacherId String
+  createdById      String
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  primaryTeacher    Teacher         @relation("PrimaryTeacher", fields: [primaryTeacherId], references: [id])
+  secondaryTeachers CourseTeacher[]
+  enrollments       Enrollment[]
+  attendances       Attendance[]
+  leaves            Leave[]
+
+  @@index([isPublished, archivedAt])
+  @@index([primaryTeacherId])
+}
+
+model CourseTeacher {
+  id        String @id @default(cuid())
+  courseId  String
+  teacherId String
+
+  course  Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@unique([courseId, teacherId])
+}
+
+// ==================== ENROLLMENT / PAYMENT ====================
+
+model Enrollment {
+  id           String           @id @default(cuid())
+  code         String           @unique
+  courseId     String
+  studentId    String
+  enrolledById String
+  status       EnrollmentStatus @default(PENDING_PAYMENT)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  course  Course   @relation(fields: [courseId], references: [id])
+  student Student  @relation(fields: [studentId], references: [id])
+  payment Payment?
+  leaves  Leave[]
+
+  @@unique([courseId, studentId])
+  @@index([status])
+}
+
+model Payment {
+  id               String        @id @default(cuid())
+  enrollmentId     String        @unique
+  amount           Decimal       @db.Decimal(10, 2)
+  currency         String        @default("TWD")
+  status           PaymentStatus @default(PENDING)
+  bankCode         String?
+  bankAccount      String?
+  transferLastFive String?
+  transferDate     DateTime?
+  confirmedAt      DateTime?
+  confirmedById    String?
+  rejectedReason   String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  enrollment Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+}
+
+// ==================== ATTENDANCE / LEAVE ====================
+
+model Attendance {
+  id         String           @id @default(cuid())
+  courseId   String
+  studentId  String
+  date       DateTime         @db.Date
+  status     AttendanceStatus @default(PRESENT)
+  note       String?
+  markedById String?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  course  Course  @relation(fields: [courseId], references: [id])
+  student Student @relation(fields: [studentId], references: [id])
+
+  @@unique([courseId, studentId, date])
+  @@index([courseId, date])
+}
+
+model Leave {
+  id            String      @id @default(cuid())
+  enrollmentId  String
+  courseId      String
+  studentId     String
+  date          DateTime    @db.Date
+  reason        String
+  status        LeaveStatus @default(SUBMITTED)
+  requestedById String
+  decidedById   String?
+  decidedAt     DateTime?
+  decisionNote  String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  enrollment Enrollment @relation(fields: [enrollmentId], references: [id])
+  course     Course     @relation(fields: [courseId], references: [id])
+  student    Student    @relation(fields: [studentId], references: [id])
+
+  @@unique([enrollmentId, date])
+  @@index([status])
+  @@index([courseId, date])
+}
+
+// ==================== AUDIT ====================
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  action     String
+  entityType String
+  entityId   String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  actor User? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([entityType, entityId])
+  @@index([actorId])
+  @@index([createdAt])
+}
