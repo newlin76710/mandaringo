@@ -12,12 +12,7 @@ import { loginSchema, type LoginInput } from "@/lib/schemas/auth";
 import { FormField } from "@/components/lms/FormField";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-const OAUTH_LABELS: Record<string, string> = {
-  google: "使用 Google 繼續",
-  facebook: "使用 Facebook 繼續",
-  line: "使用 LINE 繼續",
-};
+import { OAuthButtons } from "@/components/lms/OAuthButtons";
 
 export function LoginForm({ enabledProviders }: { enabledProviders: string[] }) {
   const router = useRouter();
@@ -70,19 +65,7 @@ export function LoginForm({ enabledProviders }: { enabledProviders: string[] }) 
             或
             <div className="h-px flex-1 bg-slate-200" />
           </div>
-          <div className="space-y-2">
-            {enabledProviders.map((p) => (
-              <Button
-                key={p}
-                type="button"
-                variant="outline"
-                className="w-full"
-                onClick={() => signIn(p, { callbackUrl })}
-              >
-                {OAUTH_LABELS[p] ?? p}
-              </Button>
-            ))}
-          </div>
+          <OAuthButtons providers={enabledProviders} callbackUrl={callbackUrl} />
         </>
       )}
 
