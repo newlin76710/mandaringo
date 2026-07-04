@@ -11,6 +11,8 @@ const dict = {
     resources: "Resources",
     contact: "Contact",
     cta: "Enquire Now",
+    portalLogin: "Login",
+    portalLoginFull: "Student / Parent / Teacher Login",
   },
   home: {
     hero: {

@@ -10,7 +10,9 @@ import { registerSchema, onboardingSchema, forgotPasswordSchema, resetPasswordSc
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+// Tolerate a trailing slash in NEXT_PUBLIC_APP_URL so links built as `${APP_URL}/path`
+// never end up with a double slash.
+const APP_URL = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/+$/, "");
 
 export async function registerWithCredentials(input: unknown) {
   const parsed = registerSchema.safeParse(input);

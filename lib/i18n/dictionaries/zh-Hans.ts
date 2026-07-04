@@ -13,6 +13,8 @@ const dict: Dictionary = {
     resources: "学习资源",
     contact: "联系我们",
     cta: "立即咨询",
+    portalLogin: "会员登录",
+    portalLoginFull: "学生／家长／老师登录",
   },
   home: {
     hero: {
