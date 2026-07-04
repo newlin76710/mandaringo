@@ -14,7 +14,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-export function TeacherProfileEditForm({ defaultValues }: { defaultValues: TeacherProfileInput }) {
+export function TeacherProfileEditForm({
+  defaultValues,
+  onSave,
+}: {
+  defaultValues: TeacherProfileInput;
+  /** Override the default "update my own profile" action — used by the admin edit page. */
+  onSave?: (profile: TeacherProfileInput) => Promise<{ success?: true; error?: string }>;
+}) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const {
@@ -26,7 +33,7 @@ export function TeacherProfileEditForm({ defaultValues }: { defaultValues: Teach
 
   async function onSubmit(profile: TeacherProfileInput) {
     setSubmitting(true);
-    const result = await updateMyProfile(profile);
+    const result = onSave ? await onSave(profile) : await updateMyProfile(profile);
     setSubmitting(false);
     if (result.error) {
       toast.error(result.error);

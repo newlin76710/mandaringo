@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { ENROLLMENT_STATUS_LABELS, ENROLLMENT_STATUS_BADGE, LEAVE_STATUS_LABELS, LEAVE_STATUS_BADGE } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import { AddStudentDialog } from "@/components/lms/AddStudentDialog";
+import { BecomeTeacherDialog } from "@/components/lms/BecomeTeacherDialog";
 
 type Parent = NonNullable<Awaited<ReturnType<typeof getParentDashboard>>>;
 
@@ -29,6 +30,18 @@ export function ParentDashboard({ parent }: { parent: Parent }) {
             </Link>
           </Button>
           <AddStudentDialog />
+          <BecomeTeacherDialog
+            defaultValues={{
+              chineseFirstName: parent.chineseFirstName,
+              chineseLastName: parent.chineseLastName,
+              englishFirstName: parent.englishFirstName,
+              englishLastName: parent.englishLastName,
+              gender: parent.gender,
+              phone: parent.phone,
+              nationality: parent.nationality ?? "",
+              postalCode: parent.postalCode ?? "",
+            }}
+          />
         </div>
       </div>
 

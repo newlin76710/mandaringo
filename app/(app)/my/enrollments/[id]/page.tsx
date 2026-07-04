@@ -24,7 +24,7 @@ export default async function EnrollmentDetailPage({ params }: { params: Promise
   if (!enrollment) notFound();
 
   const isAdmin = session.user.role === "ADMIN" || session.user.role === "SUPER_ADMIN";
-  const manageable = await getManageableStudents(session.user.id, session.user.role);
+  const manageable = await getManageableStudents(session.user.id);
   const isOwner = enrollment.enrolledById === session.user.id || manageable.some((s) => s.id === enrollment.studentId);
   if (!isOwner && !isAdmin) notFound();
 

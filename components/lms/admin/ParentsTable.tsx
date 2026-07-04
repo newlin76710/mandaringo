@@ -6,6 +6,7 @@ import { AdminDataTable } from "@/components/lms/admin/AdminDataTable";
 import { ActiveToggleButton } from "@/components/lms/admin/ActiveToggleButton";
 import { Badge } from "@/components/ui/badge";
 import { setParentActive } from "@/app/actions/admin-users";
+import { AdminCreateParentDialog } from "@/components/lms/admin/AdminCreateParentDialog";
 
 type Parent = Awaited<ReturnType<typeof listParentsForAdmin>>[number];
 
@@ -14,6 +15,7 @@ export function ParentsTable({ parents }: { parents: Parent[] }) {
     <AdminDataTable
       data={parents}
       rowKey={(p) => p.id}
+      toolbar={<AdminCreateParentDialog />}
       searchPlaceholder="搜尋姓名 / Email / 電話..."
       searchFn={(p, q) =>
         `${p.chineseLastName}${p.chineseFirstName}`.toLowerCase().includes(q) ||

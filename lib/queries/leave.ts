@@ -2,8 +2,8 @@ import { prisma } from "@/lib/prisma";
 import type { Role } from "@prisma/client";
 import { getManageableStudents } from "@/lib/queries/students";
 
-export async function getMyActiveEnrollments(userId: string, role: Role) {
-  const students = await getManageableStudents(userId, role);
+export async function getMyActiveEnrollments(userId: string) {
+  const students = await getManageableStudents(userId);
   if (students.length === 0) return [];
 
   return prisma.enrollment.findMany({
@@ -13,8 +13,8 @@ export async function getMyActiveEnrollments(userId: string, role: Role) {
   });
 }
 
-export async function getMyLeaveRequests(userId: string, role: Role) {
-  const students = await getManageableStudents(userId, role);
+export async function getMyLeaveRequests(userId: string) {
+  const students = await getManageableStudents(userId);
   if (students.length === 0) return [];
 
   return prisma.leave.findMany({

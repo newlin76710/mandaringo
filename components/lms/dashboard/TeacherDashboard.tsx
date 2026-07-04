@@ -6,10 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { COURSE_LEVEL_LABELS } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
+import { AddStudentDialog } from "@/components/lms/AddStudentDialog";
+import { BecomeParentDialog } from "@/components/lms/BecomeParentDialog";
 
 type Data = NonNullable<Awaited<ReturnType<typeof getTeacherDashboard>>>;
 
-export function TeacherDashboard({ data }: { data: Data }) {
+export function TeacherDashboard({ data, hasParentProfile }: { data: Data; hasParentProfile?: boolean }) {
   const { teacher, pendingLeaves } = data;
   const allCourses = [
     ...teacher.primaryCourses.map((c) => ({ ...c, activeCount: c._count.enrollments, isPrimary: true })),
@@ -33,6 +35,27 @@ export function TeacherDashboard({ data }: { data: Data }) {
               編輯個人資料
             </Link>
           </Button>
+          {hasParentProfile ? (
+            <>
+              <Button asChild variant="outline" size="sm">
+                <Link href="/my/enrollments">我孩子的報名</Link>
+              </Button>
+              <AddStudentDialog />
+            </>
+          ) : (
+            <BecomeParentDialog
+              defaultValues={{
+                chineseFirstName: teacher.chineseFirstName,
+                chineseLastName: teacher.chineseLastName,
+                englishFirstName: teacher.englishFirstName,
+                englishLastName: teacher.englishLastName,
+                gender: teacher.gender,
+                phone: teacher.phone,
+                nationality: teacher.nationality ?? "",
+                postalCode: teacher.postalCode ?? "",
+              }}
+            />
+          )}
           <Button asChild variant="outline" size="sm">
             <Link href="/attendance">點名</Link>
           </Button>

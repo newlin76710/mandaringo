@@ -23,7 +23,7 @@ export async function submitLeaveRequest(input: unknown) {
   const enrollment = await prisma.enrollment.findUnique({ where: { id: parsed.data.enrollmentId } });
   if (!enrollment || enrollment.status !== "ACTIVE") return { error: "找不到有效的報名紀錄" };
 
-  const manageable = await getManageableStudents(session.user.id, session.user.role);
+  const manageable = await getManageableStudents(session.user.id);
   if (!manageable.some((s) => s.id === enrollment.studentId)) return { error: "您無法為此學生申請請假" };
 
   const date = new Date(parsed.data.date);

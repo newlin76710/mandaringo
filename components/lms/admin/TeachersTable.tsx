@@ -6,6 +6,7 @@ import { AdminDataTable } from "@/components/lms/admin/AdminDataTable";
 import { ActiveToggleButton } from "@/components/lms/admin/ActiveToggleButton";
 import { Badge } from "@/components/ui/badge";
 import { setTeacherActive } from "@/app/actions/admin-users";
+import { AdminCreateTeacherDialog } from "@/components/lms/admin/AdminCreateTeacherDialog";
 
 type Teacher = Awaited<ReturnType<typeof listTeachersForAdmin>>[number];
 
@@ -14,6 +15,7 @@ export function TeachersTable({ teachers }: { teachers: Teacher[] }) {
     <AdminDataTable
       data={teachers}
       rowKey={(t) => t.id}
+      toolbar={<AdminCreateTeacherDialog />}
       searchPlaceholder="搜尋姓名 / Email / 電話..."
       searchFn={(t, q) =>
         `${t.chineseLastName}${t.chineseFirstName}`.toLowerCase().includes(q) ||

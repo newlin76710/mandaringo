@@ -15,7 +15,7 @@ export async function enrollStudent(courseId: string, studentId: string) {
   const session = await auth();
   if (!session?.user) return { error: "請先登入" };
 
-  const manageable = await getManageableStudents(session.user.id, session.user.role);
+  const manageable = await getManageableStudents(session.user.id);
   if (!manageable.some((s) => s.id === studentId) && session.user.role !== "ADMIN" && session.user.role !== "SUPER_ADMIN") {
     return { error: "您無法為此學生報名" };
   }
@@ -126,7 +126,7 @@ export async function getMyEnrollments() {
   const session = await auth();
   if (!session?.user) return [];
 
-  const students = await getManageableStudents(session.user.id, session.user.role);
+  const students = await getManageableStudents(session.user.id);
   if (students.length === 0) return [];
 
   return prisma.enrollment.findMany({

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 import { getStudentDashboard, getParentDashboard, getTeacherDashboard } from "@/lib/queries/dashboard";
 import { LmsNav } from "@/components/lms/LmsNav";
 import { StudentDashboard } from "@/components/lms/dashboard/StudentDashboard";
@@ -60,5 +61,8 @@ async function renderParent(userId: string) {
 async function renderTeacher(userId: string) {
   const data = await getTeacherDashboard(userId);
   if (!data) redirect("/onboarding");
-  return <TeacherDashboard data={data} />;
+  // A Parent who has also become a Teacher keeps their Parent profile — surface a way
+  // back to it instead of hiding it now that the dashboard only shows one view.
+  const parent = await prisma.parent.findUnique({ where: { userId }, select: { id: true } });
+  return <TeacherDashboard data={data} hasParentProfile={!!parent} />;
 }

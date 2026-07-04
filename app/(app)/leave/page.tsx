@@ -9,6 +9,7 @@ import { SubmitLeaveDialog } from "@/components/lms/SubmitLeaveDialog";
 import { LeaveDecisionButtons } from "@/components/lms/LeaveDecisionButtons";
 import { LEAVE_STATUS_LABELS, LEAVE_STATUS_BADGE } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
+import type { Role } from "@prisma/client";
 
 export const metadata: Metadata = { title: "請假 - Mandarin Go" };
 export const dynamic = "force-dynamic";
@@ -22,26 +23,31 @@ export default async function LeavePage() {
   }
 
   const isReviewer = ["TEACHER", "ADMIN", "SUPER_ADMIN"].includes(session.user.role);
+  // Not purely role-gated: a Parent who has also become a Teacher should still see their
+  // own kids' leave requests here, not just the review queue.
+  const isAdmin = session.user.role === "ADMIN" || session.user.role === "SUPER_ADMIN";
 
   return (
     <div className="min-h-screen bg-slate-50">
       <LmsNav />
       <div className="mx-auto max-w-3xl px-4 py-10">
         <h1 className="text-2xl font-extrabold text-slate-900">請假管理</h1>
-        {isReviewer ? await ReviewerView(session.user.id, session.user.role) : await RequesterView(session.user.id, session.user.role)}
+        <div className="mt-6 space-y-6">
+          {!isAdmin && (await RequesterView(session.user.id))}
+          {isReviewer && (await ReviewerView(session.user.id, session.user.role))}
+        </div>
       </div>
     </div>
   );
 }
 
-async function RequesterView(userId: string, role: "STUDENT" | "PARENT" | "TEACHER" | "ADMIN" | "SUPER_ADMIN") {
-  const [enrollments, leaves] = await Promise.all([
-    getMyActiveEnrollments(userId, role),
-    getMyLeaveRequests(userId, role),
-  ]);
+async function RequesterView(userId: string) {
+  const [enrollments, leaves] = await Promise.all([getMyActiveEnrollments(userId), getMyLeaveRequests(userId)]);
+
+  if (enrollments.length === 0 && leaves.length === 0) return null;
 
   return (
-    <div className="mt-6 space-y-6">
+    <>
       <Card>
         <CardHeader className="flex-row items-center justify-between">
           <CardTitle>申請請假</CardTitle>
@@ -75,17 +81,17 @@ async function RequesterView(userId: string, role: "STUDENT" | "PARENT" | "TEACH
           )}
         </CardContent>
       </Card>
-    </div>
+    </>
   );
 }
 
-async function ReviewerView(userId: string, role: "STUDENT" | "PARENT" | "TEACHER" | "ADMIN" | "SUPER_ADMIN") {
+async function ReviewerView(userId: string, role: Role) {
   const leaves = await getLeavesForReviewer(userId, role);
   const pending = leaves.filter((l) => l.status === "SUBMITTED");
   const decided = leaves.filter((l) => l.status !== "SUBMITTED");
 
   return (
-    <div className="mt-6 space-y-6">
+    <>
       <Card>
         <CardHeader>
           <CardTitle>待審核 ({pending.length})</CardTitle>
@@ -132,6 +138,6 @@ async function ReviewerView(userId: string, role: "STUDENT" | "PARENT" | "TEACHE
           )}
         </CardContent>
       </Card>
-    </div>
+    </>
   );
 }

@@ -3,8 +3,10 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ActiveToggleButton } from "@/components/lms/admin/ActiveToggleButton";
+import { DeleteRecordButton } from "@/components/lms/admin/DeleteRecordButton";
+import { ParentProfileEditForm } from "@/components/lms/ParentProfileEditForm";
 import { setParentActive } from "@/app/actions/admin-users";
-import { GENDER_LABELS } from "@/lib/constants";
+import { updateParentAdmin, deleteParentAdmin } from "@/app/actions/admin-parents";
 
 export const dynamic = "force-dynamic";
 
@@ -17,13 +19,24 @@ export default async function AdminParentDetailPage({ params }: { params: Promis
   if (!parent) notFound();
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-3xl space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-extrabold text-slate-900">
-          {parent.chineseLastName}
-          {parent.chineseFirstName}
-        </h1>
-        <ActiveToggleButton id={parent.id} isActive={parent.isActive} action={setParentActive} />
+        <div>
+          <h1 className="text-2xl font-extrabold text-slate-900">
+            {parent.chineseLastName}
+            {parent.chineseFirstName}
+          </h1>
+          <p className="mt-1 text-sm text-slate-500">{parent.email}</p>
+        </div>
+        <div className="flex gap-2">
+          <ActiveToggleButton id={parent.id} isActive={parent.isActive} action={setParentActive} />
+          <DeleteRecordButton
+            id={parent.id}
+            confirmMessage={`確定要刪除家長「${parent.chineseLastName}${parent.chineseFirstName}」嗎？此操作無法復原。`}
+            redirectTo="/admin/parents"
+            action={deleteParentAdmin}
+          />
+        </div>
       </div>
 
       <Card>
@@ -31,16 +44,26 @@ export default async function AdminParentDetailPage({ params }: { params: Promis
           <CardTitle>基本資料</CardTitle>
         </CardHeader>
         <CardContent>
-          <dl className="grid grid-cols-2 gap-3 text-sm">
-            <Field label="性別" value={GENDER_LABELS[parent.gender]} />
-            <Field label="電話" value={parent.phone} />
-            <Field label="Email" value={parent.email} />
-            <Field label="國籍／居住地" value={parent.nationality} />
-            <Field label="地址" value={parent.address} />
-            <Field label="其他聯繫方式" value={parent.otherContact} />
-            <Field label="次要聯繫人" value={parent.secondaryContactName} />
-            <Field label="次要聯繫人電話" value={parent.secondaryContactPhone} />
-          </dl>
+          <ParentProfileEditForm
+            defaultValues={{
+              chineseFirstName: parent.chineseFirstName,
+              chineseLastName: parent.chineseLastName,
+              englishFirstName: parent.englishFirstName,
+              englishLastName: parent.englishLastName,
+              gender: parent.gender,
+              phone: parent.phone,
+              nationality: parent.nationality ?? "",
+              postalCode: parent.postalCode ?? "",
+              address: parent.address ?? undefined,
+              otherContact: parent.otherContact ?? undefined,
+              occupation: parent.occupation ?? undefined,
+              educationLevel: parent.educationLevel ?? undefined,
+              secondaryContactName: parent.secondaryContactName ?? undefined,
+              secondaryContactPhone: parent.secondaryContactPhone ?? undefined,
+              notes: parent.notes ?? undefined,
+            }}
+            onSave={(profile) => updateParentAdmin(parent.id, profile)}
+          />
         </CardContent>
       </Card>
 
@@ -68,15 +91,6 @@ export default async function AdminParentDetailPage({ params }: { params: Promis
           )}
         </CardContent>
       </Card>
-    </div>
-  );
-}
-
-function Field({ label, value }: { label: string; value?: string | null }) {
-  return (
-    <div>
-      <dt className="text-xs text-slate-400">{label}</dt>
-      <dd className="font-medium text-slate-700">{value || "—"}</dd>
     </div>
   );
 }

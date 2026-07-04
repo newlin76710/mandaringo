@@ -14,7 +14,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-export function ParentProfileEditForm({ defaultValues }: { defaultValues: ParentProfileInput }) {
+export function ParentProfileEditForm({
+  defaultValues,
+  onSave,
+}: {
+  defaultValues: ParentProfileInput;
+  /** Override the default "update my own profile" action — used by the admin edit page. */
+  onSave?: (profile: ParentProfileInput) => Promise<{ success?: true; error?: string }>;
+}) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const {
@@ -26,7 +33,7 @@ export function ParentProfileEditForm({ defaultValues }: { defaultValues: Parent
 
   async function onSubmit(profile: ParentProfileInput) {
     setSubmitting(true);
-    const result = await updateMyProfile(profile);
+    const result = onSave ? await onSave(profile) : await updateMyProfile(profile);
     setSubmitting(false);
     if (result.error) {
       toast.error(result.error);

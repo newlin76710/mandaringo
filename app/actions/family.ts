@@ -26,17 +26,20 @@ const PARENT_REQUIRED_FIELDS = [
 
 export async function addChildStudent(input: unknown) {
   const session = await auth();
-  if (!session?.user || session.user.role !== "PARENT") return { error: "僅家長帳號可新增學生" };
+  if (!session?.user) return { error: "請先登入" };
 
   const parsed = addChildSchema.safeParse(input);
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   const { relationship, ...profile } = parsed.data;
 
+  // Not role-gated: a Teacher who has also become a Parent should be able to add
+  // students too — whether someone can do this comes down to having a Parent profile,
+  // not what User.role happens to be.
   const parent = await prisma.parent.findUnique({
     where: { userId: session.user.id },
     include: { _count: { select: { students: true } } },
   });
-  if (!parent) return { error: "找不到家長資料" };
+  if (!parent) return { error: "找不到家長資料，請先申請成為家長" };
 
   const missingField = PARENT_REQUIRED_FIELDS.find((field) => !parent[field]);
   if (missingField) {

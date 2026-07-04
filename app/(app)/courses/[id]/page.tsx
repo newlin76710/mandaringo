@@ -23,10 +23,12 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ i
   const full = course._count.enrollments >= course.maxCapacity;
 
   let studentOptions: { id: string; label: string; alreadyEnrolled: boolean }[] = [];
-  const canEnroll = session?.user && (session.user.role === "PARENT" || session.user.role === "STUDENT");
+  // Not keyed off role: a Parent who has also become a Teacher should still be able to
+  // enroll their own kids. Admin/Super Admin manage enrollments from the back office instead.
+  const canEnroll = session?.user && session.user.role !== "ADMIN" && session.user.role !== "SUPER_ADMIN";
 
   if (canEnroll) {
-    const students = await getManageableStudents(session!.user.id, session!.user.role);
+    const students = await getManageableStudents(session!.user.id);
     const enrollments = await prisma.enrollment.findMany({
       where: { courseId: course.id, studentId: { in: students.map((s) => s.id) } },
     });
