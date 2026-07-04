@@ -62,17 +62,27 @@ export const teacherProfileSchema = z.object({
 });
 export type TeacherProfileInput = z.infer<typeof teacherProfileSchema>;
 
+// Self-registration only offers Parent or Teacher — Student profiles are created by a
+// Parent (see app/actions/family.ts), not self-registered.
 export const registerSchema = z.discriminatedUnion("role", [
-  z.object({ role: z.literal("STUDENT"), email: emailSchema, password: passwordSchema, profile: studentProfileSchema }),
   z.object({ role: z.literal("PARENT"), email: emailSchema, password: passwordSchema, profile: parentProfileSchema }),
-  z.object({ role: z.literal("TEACHER"), email: emailSchema, password: passwordSchema, profile: teacherProfileSchema }),
+  z.object({
+    role: z.literal("TEACHER"),
+    email: emailSchema,
+    password: passwordSchema,
+    teacherAccessCode: z.string().min(1, "請輸入老師註冊密碼"),
+    profile: teacherProfileSchema,
+  }),
 ]);
 export type RegisterInput = z.infer<typeof registerSchema>;
 
 export const onboardingSchema = z.discriminatedUnion("role", [
-  z.object({ role: z.literal("STUDENT"), profile: studentProfileSchema }),
   z.object({ role: z.literal("PARENT"), profile: parentProfileSchema }),
-  z.object({ role: z.literal("TEACHER"), profile: teacherProfileSchema }),
+  z.object({
+    role: z.literal("TEACHER"),
+    teacherAccessCode: z.string().min(1, "請輸入老師註冊密碼"),
+    profile: teacherProfileSchema,
+  }),
 ]);
 export type OnboardingInput = z.infer<typeof onboardingSchema>;
 

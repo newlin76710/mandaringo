@@ -10,7 +10,6 @@ import { registerWithCredentials } from "@/app/actions/auth";
 import { FormField } from "@/components/lms/FormField";
 import { GenderSelect } from "@/components/lms/GenderSelect";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 
@@ -83,28 +82,8 @@ export function ParentRegisterForm({ onDone }: { onDone: () => void }) {
         <FormField label="郵遞區號" required error={errors.postalCode?.message}>
           <Input {...register("postalCode")} />
         </FormField>
-        <FormField label="地址" error={errors.address?.message}>
-          <Input {...register("address")} />
-        </FormField>
-        <FormField label="其他聯繫方式" error={errors.otherContact?.message}>
-          <Input placeholder="Facebook / Line / WhatsApp / WeChat ID" {...register("otherContact")} />
-        </FormField>
-        <FormField label="職業類別" error={errors.occupation?.message}>
-          <Input {...register("occupation")} />
-        </FormField>
-        <FormField label="最高學歷" error={errors.educationLevel?.message}>
-          <Input {...register("educationLevel")} />
-        </FormField>
-        <FormField label="次要聯繫人姓名" error={errors.secondaryContactName?.message}>
-          <Input {...register("secondaryContactName")} />
-        </FormField>
-        <FormField label="次要聯繫人電話" error={errors.secondaryContactPhone?.message}>
-          <Input {...register("secondaryContactPhone")} />
-        </FormField>
-        <FormField label="備註" error={errors.notes?.message} className="sm:col-span-2">
-          <Textarea {...register("notes")} />
-        </FormField>
       </div>
+      <p className="text-xs text-slate-400">地址、其他聯繫方式、職業、次要聯繫人等其他資料，之後可以在「會員中心」隨時補填。</p>
       <Button type="submit" size="lg" className="w-full" disabled={submitting}>
         {submitting && <Loader2 className="h-4 w-4 animate-spin" />}
         建立家長帳號

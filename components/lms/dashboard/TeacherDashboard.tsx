@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { UserCog } from "lucide-react";
 import type { getTeacherDashboard } from "@/lib/queries/dashboard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +27,12 @@ export function TeacherDashboard({ data }: { data: Data }) {
           <p className="mt-1 text-sm text-slate-500">您的課程與待辦事項</p>
         </div>
         <div className="flex gap-2">
+          <Button asChild variant="outline" size="sm">
+            <Link href="/profile">
+              <UserCog className="h-4 w-4" />
+              編輯個人資料
+            </Link>
+          </Button>
           <Button asChild variant="outline" size="sm">
             <Link href="/attendance">點名</Link>
           </Button>

@@ -115,11 +115,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return true;
     },
-    async jwt({ token, user, trigger }) {
+    async jwt({ token, user }) {
       if (user?.id) token.id = user.id;
-      if (user || trigger === "update") {
+      const userId = (token.id as string) ?? user?.id;
+
+      // Re-read role/profile from the DB on every call (not just at sign-in or on an
+      // explicit client update()) — Auth.js invokes jwt() on every session check under
+      // the JWT strategy, so this is just one indexed lookup per request. Without this,
+      // hasProfile stayed frozen at "false" from the moment of first OAuth sign-in, and
+      // completing onboarding (which relied on useSession().update() firing and landing
+      // before the next navigation) could race and leave the JWT stale — bouncing the
+      // user from /dashboard back to /onboarding in a loop even after they'd finished it.
+      if (userId) {
         const dbUser = await prisma.user.findUnique({
-          where: { id: (token.id as string) ?? user?.id },
+          where: { id: userId },
           select: {
             role: true,
             isActive: true,

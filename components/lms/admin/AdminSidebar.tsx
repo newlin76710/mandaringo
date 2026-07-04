@@ -12,6 +12,7 @@ import {
   CalendarCheck,
   ClipboardList,
   ScrollText,
+  Settings,
 } from "lucide-react";
 import type { Role } from "@prisma/client";
 import { cn } from "@/lib/utils";
@@ -25,6 +26,7 @@ const NAV = [
   { href: "/admin/enrollments", label: "報名 / 繳費審核", icon: Wallet, roles: ["ADMIN", "SUPER_ADMIN"] },
   { href: "/attendance", label: "點名", icon: CalendarCheck, roles: ["TEACHER", "ADMIN", "SUPER_ADMIN"] },
   { href: "/leave", label: "請假審核", icon: ClipboardList, roles: ["TEACHER", "ADMIN", "SUPER_ADMIN"] },
+  { href: "/admin/settings", label: "系統設定", icon: Settings, roles: ["ADMIN", "SUPER_ADMIN"] },
   { href: "/admin/audit-log", label: "系統紀錄", icon: ScrollText, roles: ["SUPER_ADMIN"] },
 ] as const;
 

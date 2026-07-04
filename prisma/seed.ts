@@ -141,12 +141,27 @@ async function main() {
     });
   }
 
+  const TEACHER_ACCESS_CODE = "MG-TEACHER-2026";
+  const existingCode = await prisma.systemSetting.findUnique({ where: { key: "TEACHER_ACCESS_CODE_HASH" } });
+  if (!existingCode) {
+    await prisma.systemSetting.create({
+      data: {
+        key: "TEACHER_ACCESS_CODE_HASH",
+        value: await bcrypt.hash(TEACHER_ACCESS_CODE, 12),
+        updatedById: superAdmin.id,
+      },
+    });
+  }
+
   console.log("Seed complete.");
   console.log("Login with any of these (password: %s):", DEV_PASSWORD);
   console.log("  super admin:", superAdmin.email);
   console.log("  admin:      ", admin.email);
   console.log("  teacher:    ", teacherUser.email);
   console.log("  parent:     ", parentUser.email);
+  if (!existingCode) {
+    console.log("Teacher registration access code (change this in /admin/settings):", TEACHER_ACCESS_CODE);
+  }
 }
 
 main()

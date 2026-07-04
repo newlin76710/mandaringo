@@ -1,15 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { GraduationCap, Users, BookOpen } from "lucide-react";
-import { StudentOnboardingForm } from "@/components/lms/StudentOnboardingForm";
+import { Users, BookOpen } from "lucide-react";
 import { ParentOnboardingForm } from "@/components/lms/ParentOnboardingForm";
 import { TeacherOnboardingForm } from "@/components/lms/TeacherOnboardingForm";
 import type { RegisterableRole } from "@/lib/constants";
 
 const ROLE_OPTIONS: { role: RegisterableRole; title: string; desc: string; icon: typeof Users }[] = [
   { role: "PARENT", title: "我是家長", desc: "管理孩子的報名、繳費與請假", icon: Users },
-  { role: "STUDENT", title: "我是學生", desc: "適合可以自行登入上課的學生", icon: GraduationCap },
   { role: "TEACHER", title: "我是老師", desc: "開課、點名、審核請假", icon: BookOpen },
 ];
 
@@ -18,7 +16,7 @@ export function OnboardingView() {
 
   if (!role) {
     return (
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2">
         {ROLE_OPTIONS.map(({ role: r, title, desc, icon: Icon }) => (
           <button
             key={r}
@@ -44,7 +42,6 @@ export function OnboardingView() {
       >
         ← 重新選擇身份
       </button>
-      {role === "STUDENT" && <StudentOnboardingForm />}
       {role === "PARENT" && <ParentOnboardingForm />}
       {role === "TEACHER" && <TeacherOnboardingForm />}
     </div>

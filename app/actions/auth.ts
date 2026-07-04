@@ -4,8 +4,9 @@ import { prisma } from "@/lib/prisma";
 import { hashPassword } from "@/lib/password";
 import { issueAuthToken, consumeAuthToken } from "@/lib/tokens";
 import { sendEmail, verificationEmailHtml, passwordResetEmailHtml } from "@/lib/email";
-import { createStudentProfile, createParentProfile, createTeacherProfile } from "@/lib/profile";
+import { createParentProfile, createTeacherProfile } from "@/lib/profile";
 import { logAudit } from "@/lib/audit";
+import { verifyTeacherAccessCode } from "@/lib/settings";
 import { registerSchema, onboardingSchema, forgotPasswordSchema, resetPasswordSchema } from "@/lib/schemas/auth";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
@@ -25,9 +26,11 @@ export async function registerWithCredentials(input: unknown) {
   if (role === "PARENT") {
     const taken = await prisma.parent.findUnique({ where: { email } });
     if (taken) return { error: "此 Email 已被使用" };
-  } else if (role === "TEACHER") {
+  } else {
     const taken = await prisma.teacher.findUnique({ where: { email } });
     if (taken) return { error: "此 Email 已被使用" };
+    const validCode = await verifyTeacherAccessCode(parsed.data.teacherAccessCode);
+    if (!validCode) return { error: "老師註冊密碼錯誤，請向行政人員確認" };
   }
 
   const passwordHash = await hashPassword(password);
@@ -42,9 +45,7 @@ export async function registerWithCredentials(input: unknown) {
       },
     });
 
-    if (role === "STUDENT") {
-      await createStudentProfile(tx, user.id, profile);
-    } else if (role === "PARENT") {
+    if (role === "PARENT") {
       await createParentProfile(tx, user.id, email, profile);
     } else {
       await createTeacherProfile(tx, user.id, email, profile);
@@ -79,9 +80,11 @@ export async function completeOnboarding(input: unknown) {
   if (role === "PARENT") {
     const taken = await prisma.parent.findUnique({ where: { email } });
     if (taken) return { error: "此 Email 已被使用，請聯繫行政人員協助合併帳號" };
-  } else if (role === "TEACHER") {
+  } else {
     const taken = await prisma.teacher.findUnique({ where: { email } });
     if (taken) return { error: "此 Email 已被使用，請聯繫行政人員協助合併帳號" };
+    const validCode = await verifyTeacherAccessCode(parsed.data.teacherAccessCode);
+    if (!validCode) return { error: "老師註冊密碼錯誤，請向行政人員確認" };
   }
 
   await prisma.$transaction(async (tx) => {
@@ -94,9 +97,7 @@ export async function completeOnboarding(input: unknown) {
       },
     });
 
-    if (role === "STUDENT") {
-      await createStudentProfile(tx, userId, profile);
-    } else if (role === "PARENT") {
+    if (role === "PARENT") {
       await createParentProfile(tx, userId, email, profile);
     } else {
       await createTeacherProfile(tx, userId, email, profile);

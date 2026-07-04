@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { UserCog } from "lucide-react";
 import type { getParentDashboard } from "@/lib/queries/dashboard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ENROLLMENT_STATUS_LABELS, ENROLLMENT_STATUS_BADGE, LEAVE_STATUS_LABELS, LEAVE_STATUS_BADGE } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
@@ -19,7 +21,15 @@ export function ParentDashboard({ parent }: { parent: Parent }) {
           </h1>
           <p className="mt-1 text-sm text-slate-500">管理您孩子的報名、繳費與請假</p>
         </div>
-        <AddStudentDialog />
+        <div className="flex gap-2">
+          <Button asChild variant="outline" size="sm">
+            <Link href="/profile">
+              <UserCog className="h-4 w-4" />
+              編輯個人資料
+            </Link>
+          </Button>
+          <AddStudentDialog />
+        </div>
       </div>
 
       {parent.students.length === 0 ? (

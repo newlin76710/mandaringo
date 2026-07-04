@@ -2,16 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { GraduationCap, Users, BookOpen, ArrowLeft, MailCheck } from "lucide-react";
+import { Users, BookOpen, ArrowLeft, MailCheck } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { StudentRegisterForm } from "@/components/lms/StudentRegisterForm";
 import { ParentRegisterForm } from "@/components/lms/ParentRegisterForm";
 import { TeacherRegisterForm } from "@/components/lms/TeacherRegisterForm";
 import type { RegisterableRole } from "@/lib/constants";
 
 const ROLE_OPTIONS: { role: RegisterableRole; title: string; desc: string; icon: typeof Users }[] = [
   { role: "PARENT", title: "我是家長", desc: "管理孩子的報名、繳費與請假", icon: Users },
-  { role: "STUDENT", title: "我是學生", desc: "適合可以自行登入上課的學生", icon: GraduationCap },
   { role: "TEACHER", title: "我是老師", desc: "開課、點名、審核請假", icon: BookOpen },
 ];
 
@@ -36,10 +34,10 @@ export function RegisterView() {
 
   if (!role) {
     return (
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-2xl">
         <h1 className="text-center text-2xl font-extrabold text-slate-900">建立 Mandarin Go 帳號</h1>
         <p className="mt-2 text-center text-sm text-slate-500">請選擇您的身份</p>
-        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {ROLE_OPTIONS.map(({ role: r, title, desc, icon: Icon }) => (
             <button
               key={r}
@@ -53,6 +51,9 @@ export function RegisterView() {
             </button>
           ))}
         </div>
+        <p className="mt-3 text-center text-xs text-slate-400">
+          想讓孩子使用自己的帳號登入？請先以家長身份註冊，再從會員中心新增學生資料。
+        </p>
         <p className="mt-6 text-center text-sm text-slate-500">
           已經有帳號了？{" "}
           <Link href="/login" className="font-semibold text-sky-600 hover:underline">
@@ -74,7 +75,6 @@ export function RegisterView() {
           <ArrowLeft className="h-4 w-4" />
           重新選擇身份
         </button>
-        {role === "STUDENT" && <StudentRegisterForm onDone={() => setDone(true)} />}
         {role === "PARENT" && <ParentRegisterForm onDone={() => setDone(true)} />}
         {role === "TEACHER" && <TeacherRegisterForm onDone={() => setDone(true)} />}
       </CardContent>

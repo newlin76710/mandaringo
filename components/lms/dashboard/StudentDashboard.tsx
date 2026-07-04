@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { UserCog } from "lucide-react";
 import type { getStudentDashboard } from "@/lib/queries/dashboard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   ENROLLMENT_STATUS_LABELS,
@@ -17,12 +19,20 @@ type Student = NonNullable<Awaited<ReturnType<typeof getStudentDashboard>>>;
 export function StudentDashboard({ student }: { student: Student }) {
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-extrabold text-slate-900">
-          嗨，{student.chineseLastName}
-          {student.chineseFirstName}！
-        </h1>
-        <p className="mt-1 text-sm text-slate-500">學號 {student.studentNumber}</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-extrabold text-slate-900">
+            嗨，{student.chineseLastName}
+            {student.chineseFirstName}！
+          </h1>
+          <p className="mt-1 text-sm text-slate-500">學號 {student.studentNumber}</p>
+        </div>
+        <Button asChild variant="outline" size="sm">
+          <Link href="/profile">
+            <UserCog className="h-4 w-4" />
+            編輯個人資料
+          </Link>
+        </Button>
       </div>
 
       <Card>

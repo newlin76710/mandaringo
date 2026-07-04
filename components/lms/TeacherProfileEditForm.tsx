@@ -4,44 +4,36 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import { z } from "zod";
 import { Loader2 } from "lucide-react";
 import { teacherProfileSchema, type TeacherProfileInput } from "@/lib/schemas/auth";
-import { completeOnboarding } from "@/app/actions/auth";
+import { updateMyProfile } from "@/app/actions/profile";
 import { FormField } from "@/components/lms/FormField";
 import { GenderSelect } from "@/components/lms/GenderSelect";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-const schema = z
-  .object({ teacherAccessCode: z.string().min(1, "請輸入老師註冊密碼") })
-  .and(teacherProfileSchema);
-type FormValues = TeacherProfileInput & { teacherAccessCode: string };
-
-export function TeacherOnboardingForm() {
+export function TeacherProfileEditForm({ defaultValues }: { defaultValues: TeacherProfileInput }) {
   const router = useRouter();
-  const { update } = useSession();
   const [submitting, setSubmitting] = useState(false);
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: { gender: "FEMALE" } });
+  } = useForm<TeacherProfileInput>({ resolver: zodResolver(teacherProfileSchema), defaultValues });
 
-  async function onSubmit(values: FormValues) {
+  async function onSubmit(profile: TeacherProfileInput) {
     setSubmitting(true);
-    const { teacherAccessCode, ...profile } = values;
-    const result = await completeOnboarding({ role: "TEACHER", teacherAccessCode, profile });
+    const result = await updateMyProfile(profile);
     setSubmitting(false);
     if (result.error) {
       toast.error(result.error);
       return;
     }
-    await update();
-    router.push("/dashboard");
+    toast.success("資料已更新");
+    router.refresh();
   }
 
   return (
@@ -59,6 +51,9 @@ export function TeacherOnboardingForm() {
         <FormField label="英文名字 (跟護照一樣)" required error={errors.englishFirstName?.message}>
           <Input {...register("englishFirstName")} />
         </FormField>
+        <FormField label="英文中間名" error={errors.englishMiddleName?.message}>
+          <Input {...register("englishMiddleName")} />
+        </FormField>
         <FormField label="性別" required error={errors.gender?.message}>
           <GenderSelect control={control} name="gender" />
         </FormField>
@@ -71,14 +66,31 @@ export function TeacherOnboardingForm() {
         <FormField label="郵遞區號" required error={errors.postalCode?.message}>
           <Input {...register("postalCode")} />
         </FormField>
-        <FormField label="老師註冊密碼" required error={errors.teacherAccessCode?.message} className="sm:col-span-2">
-          <Input type="password" placeholder="請向行政人員索取" {...register("teacherAccessCode")} />
+        <FormField label="戶籍地址／原居住地地址" error={errors.registeredAddress?.message}>
+          <Input {...register("registeredAddress")} />
+        </FormField>
+        <FormField label="現居住地地址" error={errors.residentialAddress?.message}>
+          <Input {...register("residentialAddress")} />
+        </FormField>
+        <FormField label="職業類別" error={errors.occupation?.message}>
+          <Input {...register("occupation")} />
+        </FormField>
+        <FormField label="最高學歷" error={errors.educationLevel?.message}>
+          <Input {...register("educationLevel")} />
+        </FormField>
+        <FormField label="緊急聯繫人姓名" error={errors.emergencyContactName?.message}>
+          <Input {...register("emergencyContactName")} />
+        </FormField>
+        <FormField label="緊急聯繫人電話" error={errors.emergencyContactPhone?.message}>
+          <Input {...register("emergencyContactPhone")} />
+        </FormField>
+        <FormField label="履歷／證照簡介" error={errors.bio?.message} className="sm:col-span-2">
+          <Textarea placeholder="教學經歷、證照、可授課時段與程度..." {...register("bio")} />
         </FormField>
       </div>
-      <p className="text-xs text-slate-400">地址、學歷、緊急聯絡人、履歷簡介等其他資料，之後可以在「會員中心」隨時補填。</p>
-      <Button type="submit" size="lg" className="w-full" disabled={submitting}>
+      <Button type="submit" size="lg" disabled={submitting}>
         {submitting && <Loader2 className="h-4 w-4 animate-spin" />}
-        完成設定
+        儲存變更
       </Button>
     </form>
   );

@@ -409,3 +409,14 @@ model AuditLog {
   @@index([actorId])
   @@index([createdAt])
 }
+
+// ==================== SETTINGS ====================
+
+// Generic key/value store for admin-configurable settings — currently just the
+// teacher-registration access code, stored hashed (never plaintext).
+model SystemSetting {
+  key         String   @id
+  value       String
+  updatedAt   DateTime @updatedAt
+  updatedById String?
+}

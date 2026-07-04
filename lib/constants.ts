@@ -8,7 +8,9 @@ export const ROLE_LABELS: Record<Role, string> = {
   STUDENT: "學生",
 };
 
-export const REGISTERABLE_ROLES = ["TEACHER", "PARENT", "STUDENT"] as const;
+// Student is deliberately excluded — Student profiles are created by a Parent
+// (see app/actions/family.ts), not self-registered.
+export const REGISTERABLE_ROLES = ["TEACHER", "PARENT"] as const;
 export type RegisterableRole = (typeof REGISTERABLE_ROLES)[number];
 
 export const GENDER_LABELS: Record<Gender, string> = {
