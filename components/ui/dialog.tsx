@@ -21,14 +21,36 @@ const DialogOverlay = React.forwardRef<
 ));
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
+// A Select (or Popover/DropdownMenu) opened inside this Dialog renders its content into
+// a separate Radix Popper portal, outside the Dialog's own DOM subtree. Without this
+// guard, clicking anywhere in that popper content — e.g. picking a gender option — reads
+// to Dialog's dismissable-layer as a click "outside" itself and closes the whole form.
+function isInsideRadixPopper(target: EventTarget | null) {
+  return target instanceof Element && !!target.closest("[data-radix-popper-content-wrapper]");
+}
+
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+>(({ className, children, onPointerDownOutside, onInteractOutside, ...props }, ref) => (
   <DialogPrimitive.Portal>
     <DialogOverlay />
     <DialogPrimitive.Content
       ref={ref}
+      onPointerDownOutside={(event) => {
+        if (isInsideRadixPopper(event.target)) {
+          event.preventDefault();
+          return;
+        }
+        onPointerDownOutside?.(event);
+      }}
+      onInteractOutside={(event) => {
+        if (isInsideRadixPopper(event.target)) {
+          event.preventDefault();
+          return;
+        }
+        onInteractOutside?.(event);
+      }}
       className={cn(
         "fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl bg-white p-6 shadow-2xl max-h-[90vh] overflow-y-auto",
         className

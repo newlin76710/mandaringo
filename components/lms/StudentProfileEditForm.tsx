@@ -78,6 +78,9 @@ export function StudentProfileEditForm({
         <FormField label="出生年月日" required error={errors.birthDate?.message}>
           <Input type="date" {...register("birthDate")} />
         </FormField>
+        <FormField label="Email" error={errors.email?.message}>
+          <Input type="email" {...register("email")} />
+        </FormField>
         <FormField label="電話" error={errors.phone?.message}>
           <Input {...register("phone")} />
         </FormField>

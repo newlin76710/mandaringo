@@ -3,8 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { teacherProfileSchema } from "@/lib/schemas/auth";
-import { z } from "zod";
+import { teacherProfileEditSchema } from "@/lib/schemas/auth";
 import { logAudit } from "@/lib/audit";
 
 async function requireAdmin() {
@@ -15,13 +14,11 @@ async function requireAdmin() {
   return { session };
 }
 
-const createSchema = teacherProfileSchema.and(z.object({ email: z.string().email("請輸入有效的 Email") }));
-
 export async function createTeacherAdmin(input: unknown) {
   const check = await requireAdmin();
   if ("error" in check) return { error: check.error } as const;
 
-  const parsed = createSchema.safeParse(input);
+  const parsed = teacherProfileEditSchema.safeParse(input);
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   const { email, ...d } = parsed.data;
 
@@ -59,12 +56,15 @@ export async function updateTeacherAdmin(teacherId: string, input: unknown) {
   const check = await requireAdmin();
   if ("error" in check) return { error: check.error } as const;
 
-  const parsed = teacherProfileSchema.safeParse(input);
+  const parsed = teacherProfileEditSchema.safeParse(input);
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   const d = parsed.data;
 
   const existing = await prisma.teacher.findUnique({ where: { id: teacherId } });
   if (!existing) return { error: "找不到老師資料" };
+
+  const emailTaken = await prisma.teacher.findFirst({ where: { email: d.email, NOT: { id: teacherId } } });
+  if (emailTaken) return { error: "該email已經有註冊過了，請重新確認" };
 
   await prisma.teacher.update({
     where: { id: teacherId },
@@ -75,6 +75,7 @@ export async function updateTeacherAdmin(teacherId: string, input: unknown) {
       englishMiddleName: d.englishMiddleName || null,
       englishLastName: d.englishLastName,
       gender: d.gender,
+      email: d.email,
       phone: d.phone,
       nationality: d.nationality,
       postalCode: d.postalCode,

@@ -1,33 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
+import { z } from "zod";
 import { Loader2 } from "lucide-react";
-import { parentProfileSchema, type ParentProfileInput } from "@/lib/schemas/auth";
+import { parentProfileSchema, emailSchema, type ParentProfileInput } from "@/lib/schemas/auth";
 import { completeOnboarding } from "@/app/actions/auth";
 import { FormField } from "@/components/lms/FormField";
 import { GenderSelect } from "@/components/lms/GenderSelect";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+const schema = z.object({ email: emailSchema }).and(parentProfileSchema);
+type FormValues = ParentProfileInput & { email: string };
+
 export function ParentOnboardingForm() {
   const router = useRouter();
-  const { update } = useSession();
+  const { data: session, update } = useSession();
   const [submitting, setSubmitting] = useState(false);
   const {
     register,
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm<ParentProfileInput>({ resolver: zodResolver(parentProfileSchema), defaultValues: { gender: "FEMALE" } });
+  } = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: { gender: "FEMALE" } });
 
-  async function onSubmit(profile: ParentProfileInput) {
+  // Most OAuth sign-ins already have an email on the session — pre-fill it so the user
+  // only has to type one when the provider genuinely didn't return one (e.g. LINE
+  // without the email scope, or a declined Facebook email permission).
+  useEffect(() => {
+    if (session?.user?.email) setValue("email", session.user.email);
+  }, [session?.user?.email, setValue]);
+
+  async function onSubmit(values: FormValues) {
     setSubmitting(true);
-    const result = await completeOnboarding({ role: "PARENT", profile });
+    const { email, ...profile } = values;
+    const result = await completeOnboarding({ role: "PARENT", email, profile });
     setSubmitting(false);
     if (result.error) {
       toast.error(result.error);
@@ -54,6 +67,9 @@ export function ParentOnboardingForm() {
         </FormField>
         <FormField label="性別" required error={errors.gender?.message}>
           <GenderSelect control={control} name="gender" />
+        </FormField>
+        <FormField label="Email" required error={errors.email?.message}>
+          <Input type="email" {...register("email")} />
         </FormField>
         <FormField label="電話" required error={errors.phone?.message}>
           <Input {...register("phone")} />

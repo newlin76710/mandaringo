@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,35 +8,47 @@ import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Loader2 } from "lucide-react";
-import { teacherProfileSchema, type TeacherProfileInput } from "@/lib/schemas/auth";
+import { teacherProfileSchema, emailSchema, type TeacherProfileInput } from "@/lib/schemas/auth";
 import { completeOnboarding } from "@/app/actions/auth";
 import { FormField } from "@/components/lms/FormField";
 import { GenderSelect } from "@/components/lms/GenderSelect";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-type FormValues = TeacherProfileInput & { teacherAccessCode?: string };
+type FormValues = TeacherProfileInput & { email: string; teacherAccessCode?: string };
 
 export function TeacherOnboardingForm({ requireAccessCode = true }: { requireAccessCode?: boolean }) {
   const router = useRouter();
-  const { update } = useSession();
+  const { data: session, update } = useSession();
   const [submitting, setSubmitting] = useState(false);
 
-  const schema = requireAccessCode
-    ? z.object({ teacherAccessCode: z.string().min(1, "請輸入老師註冊密碼") }).and(teacherProfileSchema)
-    : z.object({ teacherAccessCode: z.string().optional() }).and(teacherProfileSchema);
+  const schema = (
+    requireAccessCode
+      ? z.object({ teacherAccessCode: z.string().min(1, "請輸入老師註冊密碼") })
+      : z.object({ teacherAccessCode: z.string().optional() })
+  )
+    .and(z.object({ email: emailSchema }))
+    .and(teacherProfileSchema);
 
   const {
     register,
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: { gender: "FEMALE" } });
 
+  // Most OAuth sign-ins already have an email on the session — pre-fill it so the user
+  // only has to type one when the provider genuinely didn't return one (e.g. LINE
+  // without the email scope, or a declined Facebook email permission).
+  useEffect(() => {
+    if (session?.user?.email) setValue("email", session.user.email);
+  }, [session?.user?.email, setValue]);
+
   async function onSubmit(values: FormValues) {
     setSubmitting(true);
-    const { teacherAccessCode, ...profile } = values;
-    const result = await completeOnboarding({ role: "TEACHER", teacherAccessCode, profile });
+    const { teacherAccessCode, email, ...profile } = values;
+    const result = await completeOnboarding({ role: "TEACHER", teacherAccessCode, email, profile });
     setSubmitting(false);
     if (result.error) {
       toast.error(result.error);
@@ -63,6 +75,9 @@ export function TeacherOnboardingForm({ requireAccessCode = true }: { requireAcc
         </FormField>
         <FormField label="性別" required error={errors.gender?.message}>
           <GenderSelect control={control} name="gender" />
+        </FormField>
+        <FormField label="Email" required error={errors.email?.message}>
+          <Input type="email" {...register("email")} />
         </FormField>
         <FormField label="電話" required error={errors.phone?.message}>
           <Input {...register("phone")} />

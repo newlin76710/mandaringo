@@ -46,6 +46,11 @@ export async function updateStudentAdmin(studentId: string, input: unknown) {
   const existing = await prisma.student.findUnique({ where: { id: studentId } });
   if (!existing) return { error: "找不到學生資料" };
 
+  if (d.email) {
+    const emailTaken = await prisma.student.findFirst({ where: { email: d.email, NOT: { id: studentId } } });
+    if (emailTaken) return { error: "該email已經有註冊過了，請重新確認" };
+  }
+
   await prisma.student.update({
     where: { id: studentId },
     data: {
@@ -57,6 +62,7 @@ export async function updateStudentAdmin(studentId: string, input: unknown) {
       nickname: d.nickname || null,
       gender: d.gender,
       birthDate: new Date(d.birthDate),
+      email: d.email || null,
       phone: d.phone || null,
       otherContact: d.otherContact || null,
       allergies: d.allergies || null,

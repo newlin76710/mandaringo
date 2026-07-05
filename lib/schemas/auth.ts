@@ -2,6 +2,8 @@ import { z } from "zod";
 
 export const emailSchema = z.string().min(1, "請輸入 Email").email("請輸入有效的 Email");
 export const passwordSchema = z.string().min(8, "密碼至少 8 個字元");
+// A contact email field that's optional, but must be a valid address when provided.
+const optionalEmailSchema = z.union([z.literal(""), emailSchema]).optional();
 
 // Fields marked 必要 (required) in Sheet1 for a Student profile.
 export const studentProfileSchema = z.object({
@@ -13,6 +15,7 @@ export const studentProfileSchema = z.object({
   nickname: z.string().optional(),
   gender: z.enum(["MALE", "FEMALE", "OTHER"]),
   birthDate: z.string().refine((d) => !isNaN(Date.parse(d)), "請輸入有效日期"),
+  email: optionalEmailSchema,
   phone: z.string().optional(),
   otherContact: z.string().optional(),
   allergies: z.string().optional(),
@@ -41,6 +44,12 @@ export const parentProfileSchema = z.object({
 });
 export type ParentProfileInput = z.infer<typeof parentProfileSchema>;
 
+// Parent.email is a required, unique column set from the login email at registration —
+// separate from the base schema so registerSchema/onboardingSchema (which collect that
+// email at the top level, not inside `profile`) don't end up requiring it twice.
+export const parentProfileEditSchema = parentProfileSchema.extend({ email: emailSchema });
+export type ParentProfileEditInput = z.infer<typeof parentProfileEditSchema>;
+
 // Fields marked 必要 for a Teacher profile.
 export const teacherProfileSchema = z.object({
   chineseFirstName: z.string().min(1, "請輸入中文名字"),
@@ -62,6 +71,11 @@ export const teacherProfileSchema = z.object({
 });
 export type TeacherProfileInput = z.infer<typeof teacherProfileSchema>;
 
+// Teacher.email is a required, unique column set from the login email at registration —
+// kept out of the base schema for the same reason as parentProfileEditSchema above.
+export const teacherProfileEditSchema = teacherProfileSchema.extend({ email: emailSchema });
+export type TeacherProfileEditInput = z.infer<typeof teacherProfileEditSchema>;
+
 // Self-registration only offers Parent or Teacher — Student profiles are created by a
 // Parent (see app/actions/family.ts), not self-registered.
 export const registerSchema = z.discriminatedUnion("role", [
@@ -77,9 +91,14 @@ export const registerSchema = z.discriminatedUnion("role", [
 export type RegisterInput = z.infer<typeof registerSchema>;
 
 export const onboardingSchema = z.discriminatedUnion("role", [
-  z.object({ role: z.literal("PARENT"), profile: parentProfileSchema }),
+  // `email` is collected here too (not just read off the session) because an OAuth
+  // provider isn't guaranteed to return one (e.g. LINE without the email scope granted,
+  // or a user declining Facebook's email permission) — completeOnboarding falls back to
+  // this value both as the Parent/Teacher contact email and to backfill User.email.
+  z.object({ role: z.literal("PARENT"), email: emailSchema, profile: parentProfileSchema }),
   z.object({
     role: z.literal("TEACHER"),
+    email: emailSchema,
     // Optional here (unlike registerSchema): an Admin/Super Admin completing their
     // default Teacher profile doesn't need the access code — see completeOnboarding,
     // which enforces it server-side only for accounts that aren't already Admin+.

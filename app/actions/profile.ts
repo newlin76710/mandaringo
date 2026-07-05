@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { studentProfileSchema, parentProfileSchema, teacherProfileSchema } from "@/lib/schemas/auth";
+import { studentProfileSchema, parentProfileEditSchema, teacherProfileEditSchema } from "@/lib/schemas/auth";
 import { logAudit } from "@/lib/audit";
 import { resolveOwnProfile } from "@/lib/queries/own-profile";
 
@@ -41,6 +41,11 @@ export async function updateMyProfile(input: unknown) {
     if (!parsed.success) return { error: parsed.error.issues[0].message };
     const d = parsed.data;
 
+    if (d.email) {
+      const emailTaken = await prisma.student.findFirst({ where: { email: d.email, NOT: { id: existing.data.id } } });
+      if (emailTaken) return { error: "該email已經有註冊過了，請重新確認" };
+    }
+
     await prisma.student.update({
       where: { id: existing.data.id },
       data: {
@@ -52,6 +57,7 @@ export async function updateMyProfile(input: unknown) {
         nickname: d.nickname || null,
         gender: d.gender,
         birthDate: new Date(d.birthDate),
+        email: d.email || null,
         phone: d.phone || null,
         otherContact: d.otherContact || null,
         allergies: d.allergies || null,
@@ -66,9 +72,12 @@ export async function updateMyProfile(input: unknown) {
   }
 
   if (existing.type === "PARENT") {
-    const parsed = parentProfileSchema.safeParse(input);
+    const parsed = parentProfileEditSchema.safeParse(input);
     if (!parsed.success) return { error: parsed.error.issues[0].message };
     const d = parsed.data;
+
+    const emailTaken = await prisma.parent.findFirst({ where: { email: d.email, NOT: { id: existing.data.id } } });
+    if (emailTaken) return { error: "該email已經有註冊過了，請重新確認" };
 
     await prisma.parent.update({
       where: { id: existing.data.id },
@@ -78,6 +87,7 @@ export async function updateMyProfile(input: unknown) {
         englishFirstName: d.englishFirstName,
         englishLastName: d.englishLastName,
         gender: d.gender,
+        email: d.email,
         phone: d.phone,
         nationality: d.nationality,
         postalCode: d.postalCode,
@@ -97,9 +107,12 @@ export async function updateMyProfile(input: unknown) {
   }
 
   // TEACHER
-  const parsed = teacherProfileSchema.safeParse(input);
+  const parsed = teacherProfileEditSchema.safeParse(input);
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   const d = parsed.data;
+
+  const emailTaken = await prisma.teacher.findFirst({ where: { email: d.email, NOT: { id: existing.data.id } } });
+  if (emailTaken) return { error: "該email已經有註冊過了，請重新確認" };
 
   await prisma.teacher.update({
     where: { id: existing.data.id },
@@ -110,6 +123,7 @@ export async function updateMyProfile(input: unknown) {
       englishMiddleName: d.englishMiddleName || null,
       englishLastName: d.englishLastName,
       gender: d.gender,
+      email: d.email,
       phone: d.phone,
       nationality: d.nationality,
       postalCode: d.postalCode,

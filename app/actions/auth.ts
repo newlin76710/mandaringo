@@ -78,14 +78,18 @@ export async function completeOnboarding(input: unknown) {
 
   const parsed = onboardingSchema.safeParse(input);
   if (!parsed.success) return { error: parsed.error.issues[0].message };
-  const { role, profile } = parsed.data;
+  const { role, profile, email } = parsed.data;
 
   if (isAdminAccount && role !== "TEACHER") {
     return { error: "管理員帳號僅能建立老師身分的個人資料" };
   }
 
   const userId = session.user.id;
-  const email = session.user.email ?? "";
+
+  if (!session.user.email) {
+    const emailTaken = await prisma.user.findUnique({ where: { email } });
+    if (emailTaken) return { error: "此 Email 已被其他帳號使用，請改用其他 Email" };
+  }
 
   if (role === "PARENT") {
     const taken = await prisma.parent.findUnique({ where: { email } });
@@ -106,6 +110,10 @@ export async function completeOnboarding(input: unknown) {
       data: {
         role: isAdminAccount ? session.user.role : role,
         name: `${profile.chineseLastName}${profile.chineseFirstName}`,
+        // Only backfill User.email if the account genuinely has none yet (OAuth sign-in
+        // without an email scope/permission) — never overwrite an existing login email
+        // with whatever contact email the user typed here.
+        email: session.user.email ? undefined : email,
         emailVerified: new Date(),
       },
     });

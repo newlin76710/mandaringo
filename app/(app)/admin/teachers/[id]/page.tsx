@@ -57,6 +57,7 @@ export default async function AdminTeacherDetailPage({ params }: { params: Promi
               englishMiddleName: teacher.englishMiddleName ?? undefined,
               englishLastName: teacher.englishLastName,
               gender: teacher.gender,
+              email: teacher.email,
               phone: teacher.phone,
               nationality: teacher.nationality ?? "",
               postalCode: teacher.postalCode ?? "",

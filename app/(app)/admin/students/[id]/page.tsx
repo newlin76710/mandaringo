@@ -26,6 +26,7 @@ export default async function AdminStudentDetailPage({ params }: { params: Promi
   const student = await prisma.student.findUnique({
     where: { id },
     include: {
+      user: { select: { email: true } },
       parents: { include: { parent: true } },
       enrollments: { include: { course: true }, orderBy: { createdAt: "desc" } },
       leaves: { include: { course: true }, orderBy: { createdAt: "desc" } },
@@ -72,6 +73,7 @@ export default async function AdminStudentDetailPage({ params }: { params: Promi
               nickname: student.nickname ?? undefined,
               gender: student.gender,
               birthDate: toDateInput(student.birthDate),
+              email: student.email ?? student.user?.email ?? undefined,
               phone: student.phone ?? undefined,
               otherContact: student.otherContact ?? undefined,
               allergies: student.allergies ?? undefined,

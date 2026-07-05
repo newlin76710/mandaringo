@@ -51,6 +51,7 @@ export default async function AdminParentDetailPage({ params }: { params: Promis
               englishFirstName: parent.englishFirstName,
               englishLastName: parent.englishLastName,
               gender: parent.gender,
+              email: parent.email,
               phone: parent.phone,
               nationality: parent.nationality ?? "",
               postalCode: parent.postalCode ?? "",

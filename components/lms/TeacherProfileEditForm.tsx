@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
-import { teacherProfileSchema, type TeacherProfileInput } from "@/lib/schemas/auth";
+import { teacherProfileEditSchema, type TeacherProfileEditInput } from "@/lib/schemas/auth";
 import { updateMyProfile } from "@/app/actions/profile";
 import { FormField } from "@/components/lms/FormField";
 import { GenderSelect } from "@/components/lms/GenderSelect";
@@ -19,7 +19,7 @@ export function TeacherProfileEditForm({
   targetId,
   action,
 }: {
-  defaultValues: TeacherProfileInput;
+  defaultValues: TeacherProfileEditInput;
   /**
    * Pass both together to edit someone else's profile (the admin edit page) — `action`
    * must be a direct reference to a "use server" export, never an inline arrow function
@@ -27,7 +27,7 @@ export function TeacherProfileEditForm({
    * Server Action reference across the boundary, not a closure created around one.
    */
   targetId?: string;
-  action?: (id: string, profile: TeacherProfileInput) => Promise<{ success?: true; error?: string }>;
+  action?: (id: string, profile: TeacherProfileEditInput) => Promise<{ success?: true; error?: string }>;
 }) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
@@ -36,9 +36,9 @@ export function TeacherProfileEditForm({
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<TeacherProfileInput>({ resolver: zodResolver(teacherProfileSchema), defaultValues });
+  } = useForm<TeacherProfileEditInput>({ resolver: zodResolver(teacherProfileEditSchema), defaultValues });
 
-  async function onSubmit(profile: TeacherProfileInput) {
+  async function onSubmit(profile: TeacherProfileEditInput) {
     setSubmitting(true);
     const result = action && targetId ? await action(targetId, profile) : await updateMyProfile(profile);
     setSubmitting(false);
@@ -70,6 +70,9 @@ export function TeacherProfileEditForm({
         </FormField>
         <FormField label="性別" required error={errors.gender?.message}>
           <GenderSelect control={control} name="gender" />
+        </FormField>
+        <FormField label="Email" required error={errors.email?.message}>
+          <Input type="email" {...register("email")} />
         </FormField>
         <FormField label="電話" required error={errors.phone?.message}>
           <Input {...register("phone")} />
