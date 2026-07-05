@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Facebook, Mail } from "lucide-react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries/en";
@@ -20,7 +21,9 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: Diction
       <div className="container-px relative flex flex-col gap-10 py-14 md:flex-row md:justify-between">
         <div className="max-w-sm">
           <div className="flex items-center gap-2.5 font-display">
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-500 text-2xl">🐼</span>
+            <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-sky-100">
+              <Image src="/images/img33.png" alt="Mandarin Go" fill className="object-contain p-1" />
+            </span>
             <span className="text-lg font-extrabold">Mandarin Go</span>
           </div>
           <p className="mt-4 text-sm leading-relaxed text-white/70">{dict.footer.tagline}</p>

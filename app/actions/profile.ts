@@ -13,6 +13,22 @@ export async function getMyProfile() {
   return resolveOwnProfile(session.user.id, session.user.role);
 }
 
+export async function getMyLoginMethods() {
+  const session = await auth();
+  if (!session?.user) return null;
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { passwordHash: true, accounts: { select: { provider: true } } },
+  });
+  if (!user) return null;
+
+  return {
+    hasPassword: !!user.passwordHash,
+    providers: user.accounts.map((a) => a.provider),
+  };
+}
+
 export async function updateMyProfile(input: unknown) {
   const session = await auth();
   if (!session?.user) return { error: "請先登入" as const };

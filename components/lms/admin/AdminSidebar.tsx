@@ -14,12 +14,14 @@ import {
   ScrollText,
   Settings,
   ShieldCheck,
+  IdCard,
 } from "lucide-react";
 import type { Role } from "@prisma/client";
 import { cn } from "@/lib/utils";
 
 const NAV = [
   { href: "/admin", label: "儀表板", icon: LayoutDashboard, roles: ["TEACHER", "ADMIN", "SUPER_ADMIN"] },
+  { href: "/admin/members", label: "網站會員", icon: IdCard, roles: ["ADMIN", "SUPER_ADMIN"] },
   { href: "/admin/students", label: "學生管理", icon: GraduationCap, roles: ["ADMIN", "SUPER_ADMIN"] },
   { href: "/admin/parents", label: "家長管理", icon: Users, roles: ["ADMIN", "SUPER_ADMIN"] },
   { href: "/admin/teachers", label: "老師管理", icon: BookOpen, roles: ["ADMIN", "SUPER_ADMIN"] },

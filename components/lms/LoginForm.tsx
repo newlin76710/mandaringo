@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -25,6 +25,16 @@ export function LoginForm({ enabledProviders }: { enabledProviders: string[] }) 
     handleSubmit,
     formState: { errors },
   } = useForm<LoginInput>({ resolver: zodResolver(loginSchema) });
+
+  useEffect(() => {
+    const error = searchParams.get("error");
+    if (!error) return;
+    if (error === "OAuthAccountNotLinked") {
+      toast.error("這個 Email 已經用其他方式註冊過，請改用原本的登入方式");
+    } else {
+      toast.error("登入失敗，請再試一次");
+    }
+  }, [searchParams]);
 
   async function onSubmit(values: LoginInput) {
     setSubmitting(true);

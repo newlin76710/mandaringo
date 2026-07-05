@@ -40,3 +40,15 @@ export function listEnrollmentsForAdmin() {
     orderBy: { createdAt: "desc" },
   });
 }
+
+export function listMembersForAdmin() {
+  return prisma.user.findMany({
+    include: {
+      accounts: { select: { provider: true } },
+      student: { select: { id: true } },
+      teacher: { select: { id: true } },
+      parent: { select: { id: true } },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+}

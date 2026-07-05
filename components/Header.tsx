@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X, Sparkles, LogIn } from "lucide-react";
@@ -49,8 +50,8 @@ export default function Header({ locale, dict }: { locale: Locale; dict: Diction
     >
       <div className="container-px flex h-20 items-center justify-between">
         <Link href={`/${locale}`} className="flex items-center gap-2.5 font-display">
-          <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-500 text-2xl shadow-soft">
-            🐼
+          <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-sky-100 shadow-soft">
+            <Image src="/images/img33.png" alt="Mandarin Go" fill className="object-contain p-1" />
           </span>
           <span className="leading-tight">
             <span className="block text-lg font-extrabold text-ink">Mandarin Go</span>

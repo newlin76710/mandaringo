@@ -40,6 +40,10 @@ if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      // Same person may sign in via Google, Facebook, or LINE interchangeably — link
+      // by verified email instead of throwing OAuthAccountNotLinked (which silently
+      // left the user on their old session with no explanation).
+      allowDangerousEmailAccountLinking: true,
     })
   );
 }
@@ -49,6 +53,7 @@ if (process.env.FACEBOOK_CLIENT_ID && process.env.FACEBOOK_CLIENT_SECRET) {
     Facebook({
       clientId: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
     })
   );
 }
@@ -58,6 +63,7 @@ if (process.env.LINE_CLIENT_ID && process.env.LINE_CLIENT_SECRET) {
     LINE({
       clientId: process.env.LINE_CLIENT_ID,
       clientSecret: process.env.LINE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
       authorization: { params: { scope: "profile openid email" } },
       profile(profile) {
         return {

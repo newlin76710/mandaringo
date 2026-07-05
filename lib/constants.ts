@@ -84,3 +84,9 @@ export const LEAVE_STATUS_BADGE: Record<LeaveStatus, "default" | "warning" | "su
 };
 
 export const DAY_OF_WEEK_LABELS = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+
+export const LOGIN_METHOD_LABELS: Record<string, { label: string; className: string }> = {
+  google: { label: "Google", className: "border-slate-300 bg-white text-slate-700" },
+  facebook: { label: "Facebook", className: "border-transparent bg-[#1877F2] text-white" },
+  line: { label: "LINE", className: "border-transparent bg-[#06C755] text-white" },
+};
