@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -95,13 +96,17 @@ export default async function AdminStudentDetailPage({ params }: { params: Promi
             <p className="text-sm text-slate-400">尚未連結家長</p>
           ) : (
             student.parents.map((ps) => (
-              <div key={ps.id} className="flex items-center justify-between text-sm">
+              <Link
+                key={ps.id}
+                href={`/admin/parents/${ps.parent.id}`}
+                className="flex items-center justify-between text-sm text-slate-700 hover:text-sky-600"
+              >
                 <span>
                   {ps.parent.chineseLastName}
                   {ps.parent.chineseFirstName}（{ps.relationship}）
                 </span>
                 <span className="text-slate-400">{ps.parent.phone}</span>
-              </div>
+              </Link>
             ))
           )}
         </CardContent>
