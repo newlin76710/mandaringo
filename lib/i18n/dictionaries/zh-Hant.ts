@@ -15,6 +15,7 @@ const dict: Dictionary = {
     cta: "立即諮詢",
     portalLogin: "會員登入",
     portalLoginFull: "學生／家長／老師登入",
+    memberCenter: "會員中心",
   },
   home: {
     hero: {

@@ -4,13 +4,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X, Sparkles, LogIn } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { Menu, X, Sparkles, LogIn, LayoutDashboard } from "lucide-react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries/en";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const isLoggedIn = !!session?.user;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -78,12 +81,12 @@ export default function Header({ locale, dict }: { locale: Locale; dict: Diction
         <div className="hidden items-center gap-3 lg:flex">
           <LanguageSwitcher locale={locale} />
           <Link
-            href="/login"
+            href={isLoggedIn ? "/dashboard" : "/login"}
             className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-ink/70 transition-colors hover:bg-sky-50 hover:text-sky-600"
-            title={dict.nav.portalLoginFull}
+            title={isLoggedIn ? dict.nav.memberCenter : dict.nav.portalLoginFull}
           >
-            <LogIn className="h-4 w-4" />
-            {dict.nav.portalLogin}
+            {isLoggedIn ? <LayoutDashboard className="h-4 w-4" /> : <LogIn className="h-4 w-4" />}
+            {isLoggedIn ? dict.nav.memberCenter : dict.nav.portalLogin}
           </Link>
           <Link href={`/${locale}/contact`} className="btn-primary !px-5 !py-2.5 text-sm">
             <Sparkles className="h-4 w-4" />
@@ -115,9 +118,12 @@ export default function Header({ locale, dict }: { locale: Locale; dict: Diction
                 {link.label}
               </Link>
             ))}
-            <Link href="/login" className="flex items-center gap-2 rounded-xl px-4 py-3 text-base font-semibold text-ink/80 hover:bg-sky-50">
-              <LogIn className="h-4 w-4" />
-              {dict.nav.portalLoginFull}
+            <Link
+              href={isLoggedIn ? "/dashboard" : "/login"}
+              className="flex items-center gap-2 rounded-xl px-4 py-3 text-base font-semibold text-ink/80 hover:bg-sky-50"
+            >
+              {isLoggedIn ? <LayoutDashboard className="h-4 w-4" /> : <LogIn className="h-4 w-4" />}
+              {isLoggedIn ? dict.nav.memberCenter : dict.nav.portalLoginFull}
             </Link>
           </nav>
           <div className="mt-4 flex items-center justify-between gap-3">

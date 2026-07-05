@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 import { Card, CardContent } from "@/components/ui/card";
 import { LoginForm } from "@/components/lms/LoginForm";
 
 export const metadata: Metadata = { title: "登入 - Mandarin Go" };
+export const dynamic = "force-dynamic";
 
 function getEnabledProviders() {
   const providers: string[] = [];
@@ -13,7 +16,17 @@ function getEnabledProviders() {
   return providers;
 }
 
-export default function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ callbackUrl?: string }>;
+}) {
+  const session = await auth();
+  if (session?.user) {
+    const { callbackUrl } = await searchParams;
+    redirect(callbackUrl || "/dashboard");
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-sky-50 to-white px-4 py-16">
       <Card className="w-full max-w-sm">

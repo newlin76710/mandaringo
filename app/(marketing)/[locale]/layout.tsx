@@ -3,6 +3,7 @@ import { Baloo_2, Noto_Sans_SC, Noto_Sans_TC } from "next/font/google";
 import "../../globals.css";
 import { locales, isLocale, defaultLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
+import { AuthSessionProvider } from "@/components/lms/AuthSessionProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -55,9 +56,11 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${baloo.variable} ${notoTC.variable} ${notoSC.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
-        <Header locale={locale} dict={dict} />
-        <main className="flex-1">{children}</main>
-        <Footer locale={locale} dict={dict} />
+        <AuthSessionProvider>
+          <Header locale={locale} dict={dict} />
+          <main className="flex-1">{children}</main>
+          <Footer locale={locale} dict={dict} />
+        </AuthSessionProvider>
       </body>
     </html>
   );
