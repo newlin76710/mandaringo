@@ -4,6 +4,7 @@ import { Settings } from "lucide-react";
 import { auth } from "@/auth";
 import { ROLE_LABELS } from "@/lib/constants";
 import { UserMenu } from "@/components/lms/UserMenu";
+import { MobileNavMenu } from "@/components/lms/MobileNavMenu";
 import { Button } from "@/components/ui/button";
 
 export async function LmsNav() {
@@ -21,7 +22,7 @@ export async function LmsNav() {
           Mandarin Go 學習平台
         </Link>
 
-        <nav className="flex items-center gap-4 text-sm font-semibold text-slate-600">
+        <nav className="hidden items-center gap-4 text-sm font-semibold text-slate-600 md:flex">
           <Link href="/courses" className="hover:text-sky-600">
             課程列表
           </Link>
@@ -51,6 +52,14 @@ export async function LmsNav() {
             </div>
           )}
         </nav>
+
+        <div className="md:hidden">
+          <MobileNavMenu
+            isLoggedIn={!!session?.user}
+            isAdmin={isAdmin}
+            roleLabel={session?.user ? ROLE_LABELS[session.user.role] : undefined}
+          />
+        </div>
       </div>
     </header>
   );

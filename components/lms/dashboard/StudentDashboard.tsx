@@ -19,7 +19,7 @@ type Student = NonNullable<Awaited<ReturnType<typeof getStudentDashboard>>>;
 export function StudentDashboard({ student }: { student: Student }) {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-900">
             嗨，{student.chineseLastName}
@@ -27,7 +27,7 @@ export function StudentDashboard({ student }: { student: Student }) {
           </h1>
           <p className="mt-1 text-sm text-slate-500">學號 {student.studentNumber}</p>
         </div>
-        <Button asChild variant="outline" size="sm">
+        <Button asChild variant="outline" size="sm" className="self-start sm:self-auto">
           <Link href="/profile">
             <UserCog className="h-4 w-4" />
             編輯個人資料

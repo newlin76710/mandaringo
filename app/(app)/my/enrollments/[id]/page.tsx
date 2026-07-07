@@ -41,9 +41,11 @@ export default async function EnrollmentDetailPage({ params }: { params: Promise
     <div className="min-h-screen bg-slate-50">
       <LmsNav />
       <div className="mx-auto max-w-2xl px-4 py-10">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <h1 className="text-2xl font-extrabold text-slate-900">{enrollment.course.name}</h1>
-          <Badge variant={ENROLLMENT_STATUS_BADGE[enrollment.status]}>{ENROLLMENT_STATUS_LABELS[enrollment.status]}</Badge>
+          <Badge variant={ENROLLMENT_STATUS_BADGE[enrollment.status]} className="shrink-0">
+            {ENROLLMENT_STATUS_LABELS[enrollment.status]}
+          </Badge>
         </div>
         <p className="mt-1 text-sm text-slate-500">
           學生：{enrollment.student.chineseLastName}

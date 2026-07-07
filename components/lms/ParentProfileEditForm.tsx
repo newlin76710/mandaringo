@@ -10,6 +10,7 @@ import { parentProfileEditSchema, type ParentProfileEditInput } from "@/lib/sche
 import { updateMyProfile } from "@/app/actions/profile";
 import { FormField } from "@/components/lms/FormField";
 import { GenderSelect } from "@/components/lms/GenderSelect";
+import { PhoneInput } from "@/components/lms/PhoneInput";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -72,7 +73,7 @@ export function ParentProfileEditForm({
           <Input type="email" {...register("email")} />
         </FormField>
         <FormField label="電話" required error={errors.phone?.message}>
-          <Input {...register("phone")} />
+          <PhoneInput control={control} name="phone" />
         </FormField>
         <FormField label="國籍／居住地" required error={errors.nationality?.message}>
           <Input {...register("nationality")} />

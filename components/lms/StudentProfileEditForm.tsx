@@ -10,6 +10,7 @@ import { studentProfileSchema, type StudentProfileInput } from "@/lib/schemas/au
 import { updateMyProfile } from "@/app/actions/profile";
 import { FormField } from "@/components/lms/FormField";
 import { GenderSelect } from "@/components/lms/GenderSelect";
+import { PhoneInput } from "@/components/lms/PhoneInput";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -82,7 +83,7 @@ export function StudentProfileEditForm({
           <Input type="email" {...register("email")} />
         </FormField>
         <FormField label="電話" error={errors.phone?.message}>
-          <Input {...register("phone")} />
+          <PhoneInput control={control} name="phone" />
         </FormField>
         <FormField label="其他聯繫方式" error={errors.otherContact?.message}>
           <Input placeholder="Facebook / Line / WhatsApp / WeChat ID" {...register("otherContact")} />

@@ -9,6 +9,7 @@ import { parentProfileSchema, emailSchema, passwordSchema } from "@/lib/schemas/
 import { registerWithCredentials } from "@/app/actions/auth";
 import { FormField } from "@/components/lms/FormField";
 import { GenderSelect } from "@/components/lms/GenderSelect";
+import { PhoneInput } from "@/components/lms/PhoneInput";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
@@ -53,7 +54,7 @@ export function ParentRegisterForm({ onDone }: { onDone: () => void }) {
           <Input type="email" {...register("email")} />
         </FormField>
         <FormField label="電話" required error={errors.phone?.message}>
-          <Input {...register("phone")} />
+          <PhoneInput control={control} name="phone" />
         </FormField>
         <FormField label="密碼" required error={errors.password?.message}>
           <Input type="password" {...register("password")} />

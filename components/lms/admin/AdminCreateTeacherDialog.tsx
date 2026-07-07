@@ -11,6 +11,7 @@ import { teacherProfileSchema, emailSchema, type TeacherProfileInput } from "@/l
 import { createTeacherAdmin } from "@/app/actions/admin-teachers";
 import { FormField } from "@/components/lms/FormField";
 import { GenderSelect } from "@/components/lms/GenderSelect";
+import { PhoneInput } from "@/components/lms/PhoneInput";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -78,7 +79,7 @@ export function AdminCreateTeacherDialog() {
               <GenderSelect control={control} name="gender" />
             </FormField>
             <FormField label="電話" required error={errors.phone?.message}>
-              <Input {...register("phone")} />
+              <PhoneInput control={control} name="phone" />
             </FormField>
             <FormField label="國籍／居住地" required error={errors.nationality?.message}>
               <Input {...register("nationality")} />

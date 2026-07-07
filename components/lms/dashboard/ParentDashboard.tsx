@@ -14,7 +14,7 @@ type Parent = NonNullable<Awaited<ReturnType<typeof getParentDashboard>>>;
 export function ParentDashboard({ parent }: { parent: Parent }) {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-900">
             {parent.chineseLastName}
@@ -22,7 +22,7 @@ export function ParentDashboard({ parent }: { parent: Parent }) {
           </h1>
           <p className="mt-1 text-sm text-slate-500">管理您孩子的報名、繳費與請假</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button asChild variant="outline" size="sm">
             <Link href="/profile">
               <UserCog className="h-4 w-4" />
