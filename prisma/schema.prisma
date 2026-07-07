@@ -38,6 +38,11 @@ enum EnrollmentStatus {
   WITHDRAWN
 }
 
+enum PaymentMethod {
+  BANK_TRANSFER
+  ECPAY
+}
+
 enum PaymentStatus {
   PENDING
   CONFIRMING
@@ -333,10 +338,15 @@ model Payment {
   amount           Decimal       @db.Decimal(10, 2)
   currency         String        @default("TWD")
   status           PaymentStatus @default(PENDING)
+  method           PaymentMethod @default(BANK_TRANSFER)
   bankCode         String?
   bankAccount      String?
   transferLastFive String?
   transferDate     DateTime?
+  merchantTradeNo  String?       @unique
+  ecpayPaymentType String?
+  ecpayTradeNo     String?
+  ecpayPaymentInfo Json?
   confirmedAt      DateTime?
   confirmedById    String?
   rejectedReason   String?

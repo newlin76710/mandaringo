@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { ENROLLMENT_STATUS_LABELS, ENROLLMENT_STATUS_BADGE } from "@/lib/constants";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { PaymentProofForm } from "@/components/lms/PaymentProofForm";
+import { EcpayCheckoutButton } from "@/components/lms/EcpayCheckoutButton";
 
 export const dynamic = "force-dynamic";
 
@@ -28,6 +29,14 @@ export default async function EnrollmentDetailPage({ params }: { params: Promise
   const isOwner = enrollment.enrolledById === session.user.id || manageable.some((s) => s.id === enrollment.studentId);
   if (!isOwner && !isAdmin) notFound();
 
+  const ecpayPendingInfo = enrollment.payment?.ecpayPaymentInfo as {
+    paymentType?: string;
+    bankCode?: string;
+    vAccount?: string;
+    paymentNo?: string;
+    expireDate?: string;
+  } | null;
+
   return (
     <div className="min-h-screen bg-slate-50">
       <LmsNav />
@@ -45,10 +54,52 @@ export default async function EnrollmentDetailPage({ params }: { params: Promise
           <CardContent className="pt-6">
             {enrollment.status === "PENDING_PAYMENT" && enrollment.payment && (
               <div className="space-y-5">
+                <EcpayCheckoutButton enrollmentId={enrollment.id} />
+
+                {ecpayPendingInfo && (
+                  <div className="rounded-xl bg-amber-50 p-4 text-sm text-amber-900">
+                    <p className="font-bold">
+                      {ecpayPendingInfo.paymentType?.startsWith("ATM") ? "請至 ATM 或網路銀行轉帳" : "請至超商繳費"}
+                    </p>
+                    <dl className="mt-3 space-y-1">
+                      {ecpayPendingInfo.bankCode && (
+                        <div className="flex justify-between">
+                          <dt>銀行代碼</dt>
+                          <dd className="font-semibold">{ecpayPendingInfo.bankCode}</dd>
+                        </div>
+                      )}
+                      {ecpayPendingInfo.vAccount && (
+                        <div className="flex justify-between">
+                          <dt>轉帳帳號</dt>
+                          <dd className="font-semibold">{ecpayPendingInfo.vAccount}</dd>
+                        </div>
+                      )}
+                      {ecpayPendingInfo.paymentNo && (
+                        <div className="flex justify-between">
+                          <dt>繳費代碼</dt>
+                          <dd className="font-semibold">{ecpayPendingInfo.paymentNo}</dd>
+                        </div>
+                      )}
+                      {ecpayPendingInfo.expireDate && (
+                        <div className="flex justify-between">
+                          <dt>繳費期限</dt>
+                          <dd className="font-semibold">{ecpayPendingInfo.expireDate}</dd>
+                        </div>
+                      )}
+                    </dl>
+                  </div>
+                )}
+
+                <div className="flex items-center gap-3 text-xs font-semibold text-slate-400">
+                  <div className="h-px flex-1 bg-slate-200" />
+                  或
+                  <div className="h-px flex-1 bg-slate-200" />
+                </div>
+
                 <div className="rounded-xl bg-sky-50 p-4 text-sm text-sky-900">
                   <p className="flex items-center gap-2 font-bold">
                     <Landmark className="h-4 w-4" />
-                    請匯款至以下帳戶
+                    親自匯款至以下帳戶
                   </p>
                   <dl className="mt-3 space-y-1">
                     <div className="flex justify-between">
