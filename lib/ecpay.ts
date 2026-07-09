@@ -84,9 +84,8 @@ export function buildAioCheckoutParams(input: EcpayCheckoutInput) {
     TradeDesc: input.tradeDesc,
     ItemName: input.itemName,
     ReturnURL: input.returnURL,
-    // "ALL" 讓付款人在綠界頁面自行選擇信用卡／ATM／超商代碼／網路ATM，
-    // 實際開放的方式仍以綠界商店後台設定為準。
-    ChoosePayment: "ALL",
+    // TODO: 排除 10100050 參數錯誤後改回 "ALL"
+    ChoosePayment: "Credit",
     ClientBackURL: input.clientBackURL,
     NeedExtraPaymentInfo: "Y",
     PaymentInfoURL: input.paymentInfoURL,
