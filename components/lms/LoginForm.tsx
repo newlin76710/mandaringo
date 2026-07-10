@@ -13,6 +13,7 @@ import { FormField } from "@/components/lms/FormField";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { OAuthButtons } from "@/components/lms/OAuthButtons";
+import { OpenInBrowserBanner } from "@/components/lms/OpenInBrowserBanner";
 
 export function LoginForm({ enabledProviders }: { enabledProviders: string[] }) {
   const router = useRouter();
@@ -50,6 +51,8 @@ export function LoginForm({ enabledProviders }: { enabledProviders: string[] }) 
 
   return (
     <div className="space-y-6">
+      <OpenInBrowserBanner />
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <FormField label="Email" required error={errors.email?.message}>
           <Input type="email" autoComplete="email" {...register("email")} />
