@@ -10,6 +10,7 @@ import { ENROLLMENT_STATUS_LABELS, ENROLLMENT_STATUS_BADGE } from "@/lib/constan
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { PaymentProofForm } from "@/components/lms/PaymentProofForm";
 import { EcpayCheckoutButton } from "@/components/lms/EcpayCheckoutButton";
+import { CancelEnrollmentButton } from "@/components/lms/CancelEnrollmentButton";
 
 export const dynamic = "force-dynamic";
 
@@ -123,6 +124,7 @@ export default async function EnrollmentDetailPage({ params }: { params: Promise
                   </dl>
                 </div>
                 <PaymentProofForm enrollmentId={enrollment.id} />
+                <CancelEnrollmentButton enrollmentId={enrollment.id} />
               </div>
             )}
 
@@ -134,6 +136,7 @@ export default async function EnrollmentDetailPage({ params }: { params: Promise
                   已收到您於 {enrollment.payment?.transferDate ? formatDate(enrollment.payment.transferDate) : "-"} 的匯款資訊
                   （末5碼 {enrollment.payment?.transferLastFive}），行政人員確認後即會開通課程。
                 </p>
+                <CancelEnrollmentButton enrollmentId={enrollment.id} className="w-auto" />
               </div>
             )}
 

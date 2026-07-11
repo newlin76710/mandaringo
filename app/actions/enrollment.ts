@@ -122,6 +122,42 @@ export async function submitPaymentProof(enrollmentId: string, input: unknown) {
   return { success: true as const };
 }
 
+export async function cancelEnrollment(enrollmentId: string) {
+  const session = await auth();
+  if (!session?.user) return { error: "請先登入" };
+
+  const enrollment = await prisma.enrollment.findUnique({
+    where: { id: enrollmentId },
+    include: { payment: true },
+  });
+  if (!enrollment) return { error: "找不到報名紀錄" };
+
+  const manageable = await getManageableStudents(session.user.id);
+  const isOwner = enrollment.enrolledById === session.user.id || manageable.some((s) => s.id === enrollment.studentId);
+  const isAdmin = session.user.role === "ADMIN" || session.user.role === "SUPER_ADMIN";
+  if (!isOwner && !isAdmin) return { error: "無權限操作" };
+  if (enrollment.status !== "PENDING_PAYMENT" && enrollment.status !== "CONFIRMING") {
+    return { error: "此報名狀態不允許取消" };
+  }
+
+  await prisma.$transaction([
+    prisma.enrollment.update({ where: { id: enrollmentId }, data: { status: "CANCELLED" } }),
+    prisma.payment.update({ where: { enrollmentId }, data: { status: "CANCELLED" } }),
+  ]);
+
+  await logAudit({
+    actorId: session.user.id,
+    action: "enrollment.cancel",
+    entityType: "Enrollment",
+    entityId: enrollmentId,
+  });
+
+  revalidatePath("/courses");
+  revalidatePath("/my/enrollments");
+  revalidatePath(`/my/enrollments/${enrollmentId}`);
+  return { success: true as const };
+}
+
 export async function getMyEnrollments() {
   const session = await auth();
   if (!session?.user) return [];
